@@ -2,61 +2,21 @@
   "name": "scorebored",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "main.js",
   "scripts": {
-    "dev": "electron-webpack dev",
-    "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+    "start": "electron .",
+    "test": "mocha --compilers js:babel-core/register"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "electron-mocha": "^4.0.3",
+    "electron-prebuilt-compile": "^1.7.9"
   },
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-router-dom": "^4.2.2",
-    "source-map-support": "^0.5.0"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-react": "^6.24.1",
-    "electron": "1.7.9",
-    "electron-builder": "^19.42.1",
-    "electron-webpack": "1.10.1",
-    "electron-webpack-eslint": "^1.2.0",
-    "eslint-plugin-class-property": "^1.0.6",
-    "eslint-plugin-react": "^7.4.0",
-    "webpack": "^3.8.1"
-  },
-  "babel": {
-    "plugins": [
-      "transform-class-properties",
-      "transform-object-rest-spread"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended"
-    ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "sourceType": "module",
-      "ecmaVersion": 7,
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    },
-    "plugins": [
-      "react",
-      "class-property"
-    ],
-    "rules": {
-      "semi": 2,
-      "no-class-assign": 0
-    }
+    "react-router-dom": "^4.2.2"
   }
 }

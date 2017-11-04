@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
-class NewGame extends React.Component {
+class MatchSettings extends React.Component {
     render = () => {
         return (
             <div>
-                <h3>Start Match</h3>
+                <h3>Match Settings</h3>
                 <Link to="/">
                     <button>Back</button>
                 </Link>
@@ -17,4 +17,4 @@ class NewGame extends React.Component {
     }
 }
 
-export default NewGame;
+export default MatchSettings;

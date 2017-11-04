@@ -1,0 +1,18 @@
+{
+    "application/javascript": {
+        "presets": [
+            "es2016-node5",
+            "react"
+        ],
+        "plugins": [
+            ["module-resolver", {
+                "alias": {
+                    "@": "./src"
+                }
+            }],
+            "transform-class-properties",
+            "syntax-object-rest-spread"
+        ],
+        "sourceMaps": "inline"
+    }
+}
