@@ -15,7 +15,7 @@ yarn
 
 To start:
 ```
-yarn dev
+yarn start
 ```
 
 Wheee!
