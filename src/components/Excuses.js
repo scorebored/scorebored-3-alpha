@@ -10,13 +10,13 @@ class Excuses extends React.Component {
                     <button>Back</button>
                 </Link>
                 <ul>
-                    <li>Your shirt is white or orange, can&rsquo;t see the ball when 
+                    <li>Your shirt is white or orange, can&rsquo;t see the ball when
                         it&rsquo;s in front of your shirt</li>
                     <li>My back hurts</li>
                     <li>I let him win</li>
                     <li>The lighting was bad</li>
                     <li>I thought he was Jeff</li>
-                    <li>I was practicing my swing and was not 
+                    <li>I was practicing my swing and was not
                         playing serious</li>
                     <li>My wrist hurts</li>
                     <li>It is Tuesday</li>
