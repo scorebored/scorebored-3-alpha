@@ -1,16 +1,16 @@
 
 class Referee {
 
-    constructor(options) {
+    constructor() {
         this.match = {
             current: 1, 
             total: 1,
             scores: [0, 0],
-        }
+        };
         this.game = {
             scores: [0, 0],
             length: 21
-        }
+        };
         this.server = null;
     }
 

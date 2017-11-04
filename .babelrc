@@ -1,6 +1,6 @@
 {
     "presets": [
-        "es2016-node5",        
+        "es2017-node7",        
         "react"
   ],
   "plugins": [
@@ -10,7 +10,8 @@
         }
     }],
     "transform-class-properties",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "transform-async-to-generator"
   ]
 }
 
