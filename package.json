@@ -5,13 +5,14 @@
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
-    "test": "mocha --compilers js:babel-core/register",
+    "test": "jest",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "lint": "eslint --cache --color --ext .jsx,.js src"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
+    "babel-jest": "^21.2.0",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -21,11 +22,12 @@
     "babel-preset-react": "^6.24.1",
     "electron-devtools-installer": "^2.2.1",
     "electron-forge": "^4.1.2",
-    "electron-mocha": "^4.0.3",
     "electron-prebuilt-compile": "1.7.9",
     "eslint": "^4.10.0",
     "eslint-plugin-react": "^7.4.0",
+    "jest": "^21.2.1",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-test-renderer": "^16.0.0",
     "redux-devtools": "^3.4.0"
   },
   "dependencies": {
