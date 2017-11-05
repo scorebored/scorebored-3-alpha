@@ -12,6 +12,10 @@ class MatchSettings extends React.Component {
                 <br/>
                 <br/>
                 Some fields go here
+                <br/>
+                <Link to="/display">
+                    <button>Show me the scores</button>
+                </Link>
             </div>
         );
     }

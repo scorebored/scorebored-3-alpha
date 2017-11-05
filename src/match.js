@@ -20,32 +20,49 @@ const defaultState = {
     server: null,
 };
 
+export const setGameLength = createAction("match/setGameLength");
 export const score = createAction("match/score");
+export const adjustPoints = createAction("match/adjustPoints");
 
-export default handleActions({
+export const reducer = handleActions({
+    [setGameLength]: (state, action) => {
+        return { ...state, gameLength: action.payload };
+    },
     [score]: (state, action) => {
+        if (isGameOver(state)) {
+            return state;
+        }
         const previous = state[action.payload];
         return {
-            ...state, 
+            ...state,
             [action.payload]: {
-                ...previous, 
-                points: previous.points + 1    
+                ...previous,
+                points: previous.points + 1
             }
         };
-    }
+    },
+    [adjustPoints]: (state, action) => {
+        return {
+            ...state,
+            player0: { ...state.player0, points: action.payload[0] },
+            player1: { ...state.player1, points: action.payload[1] },
+        };
+    },
 }, defaultState);
 
-export const isGameOver = createSelector(
-    (state) => state.match, 
-    (match) => {
-        const p0 = match.player0.points; 
-        const p1 = match.player1.points;
-        if (p0 < match.gameLength && p1 < match.gameLength) {
-            return false;
-        }
-        if (Math.abs(p0 - p1) < 2) {
-            return false;
-        }
-        return true;
+const isGameOver = (match) => {
+    const p0 = match.player0.points;
+    const p1 = match.player1.points;
+    if (p0 < match.gameLength && p1 < match.gameLength) {
+        return false;
     }
+    if (Math.abs(p0 - p1) < 2) {
+        return false;
+    }
+    return true;
+};
+
+export const gameOver = createSelector(
+    (state) => state.match,
+    (match) => isGameOver(match),
 );
