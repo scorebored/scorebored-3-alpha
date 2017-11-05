@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+
 import * as actions from "@/match";
 
 class ScoreDisplay extends React.Component {
@@ -33,6 +35,9 @@ class ScoreDisplay extends React.Component {
                         {match.player1.name}
                     </li>
                 </ul>
+                <Link to="/adjust">
+                    <button>Adjust scores</button>
+                </Link>
             </div>
         );
     }

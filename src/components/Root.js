@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import { store } from "@/store";
+import AdjustMatch from "@/components/AdjustMatch";
 import Excuses from "@/components/Excuses";
 import MainMenu from "@/components/MainMenu";
 import MatchSettings from "@/components/MatchSettings";
@@ -15,6 +16,7 @@ class Root extends React.Component {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={MainMenu} />
+                        <Route exact path="/adjust" component={AdjustMatch} />
                         <Route exact path="/excuses" component={Excuses} />
                         <Route exact path="/display" component={ScoreDisplay} />
                         <Route exact path="/start" component={MatchSettings} />
