@@ -8,7 +8,6 @@ import PlayerDisplay from "@/components/PlayerDisplay";
 class Scoreboard extends React.Component {
 
     render = () => {
-        const { match } = this.props;
         return (
             <div>
                 <ul>
