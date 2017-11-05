@@ -9,23 +9,6 @@
   <div id="root" />
 </body>
 
-<script type="text/jsx">
-  import * as React from "react";
-  import * as ReactDOM from "react-dom";
-  import Root from "@/components/Root";
-  import { AppContainer } from 'react-hot-loader';
-
-  const render = () => {
-    const Root = require('./components/Root').default;
-    ReactDOM.render(<AppContainer><Root /></AppContainer>,
-      document.getElementById("root"));
-  }
-
-  render();
-
-  if (module.hot) {
-    module.hot.accept(render);
-  }
-</script>
+<script src="./app.js"/>
 
 </html>
