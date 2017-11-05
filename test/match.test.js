@@ -8,17 +8,17 @@ beforeEach(() => {
 
 describe("gameOver, 11 point game", () => {
     test("should be false when scores are less than 11", () => {
-        store.dispatch(match.setGameLength(11));
+        store.dispatch(match.gameLength(11));
         store.dispatch(match.adjustPoints([7, 9]));
         expect(match.gameOver(store.getState())).toBe(false);   
     });
     test("should be false when not winning by two", () => {
-        store.dispatch(match.setGameLength(11));
+        store.dispatch(match.gameLength(11));
         store.dispatch(match.adjustPoints([11, 10]));
         expect(match.gameOver(store.getState())).toBe(false);       
     });
     test("should be true when winning by more than 2", () => {
-        store.dispatch(match.setGameLength(11));
+        store.dispatch(match.gameLength(11));
         store.dispatch(match.adjustPoints([12, 10]));
         expect(match.gameOver(store.getState())).toBe(true);            
     });
@@ -26,17 +26,17 @@ describe("gameOver, 11 point game", () => {
 
 describe("gameOver, 21 point game", () => {
     test("should be false when scores are less than 11", () => {
-        store.dispatch(match.setGameLength(21));
+        store.dispatch(match.gameLength(21));
         store.dispatch(match.adjustPoints([17, 19]));
         expect(match.gameOver(store.getState())).toBe(false);           
     });
     test("should be false when not winning by two", () => {
-        store.dispatch(match.setGameLength(21));
+        store.dispatch(match.gameLength(21));
         store.dispatch(match.adjustPoints([21, 20]));
         expect(match.gameOver(store.getState())).toBe(false);           
     });
     test("should be true when winning by more than 2", () => {
-        store.dispatch(match.setGameLength(21));
+        store.dispatch(match.gameLength(21));
         store.dispatch(match.adjustPoints([22, 20]));
         expect(match.gameOver(store.getState())).toBe(true);           
     });

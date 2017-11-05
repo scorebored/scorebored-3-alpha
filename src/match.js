@@ -20,14 +20,21 @@ const defaultState = {
     server: null,
 };
 
-export const setGameLength = createAction("match/setGameLength");
-export const score = createAction("match/score");
 export const adjustPoints = createAction("match/adjustPoints");
+export const gameLength = createAction("match/gameLength");
+export const server = createAction("match/server");
+export const score = createAction("match/score");
 
 export const reducer = handleActions({
-    [setGameLength]: (state, action) => {
-        return { ...state, gameLength: action.payload };
-    },
+    [adjustPoints]: (state, action) => ({
+        ...state,
+        player0: { ...state.player0, points: action.payload[0] },
+        player1: { ...state.player1, points: action.payload[1] },
+    }),
+    [gameLength]: (state, action) => ({
+        ...state,
+        gameLength: action.payload
+    }),
     [score]: (state, action) => {
         if (isGameOver(state)) {
             return state;
@@ -41,13 +48,10 @@ export const reducer = handleActions({
             }
         };
     },
-    [adjustPoints]: (state, action) => {
-        return {
-            ...state,
-            player0: { ...state.player0, points: action.payload[0] },
-            player1: { ...state.player1, points: action.payload[1] },
-        };
-    },
+    [server]: (state, action) => ({
+        ...state, 
+        server: action.payload 
+    }),
 }, defaultState);
 
 const isGameOver = (match) => {

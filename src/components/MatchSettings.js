@@ -13,7 +13,7 @@ class MatchSettings extends React.Component {
                 <br/>
                 Some fields go here
                 <br/>
-                <Link to="/display">
+                <Link to="/scoreboard">
                     <button>Show me the scores</button>
                 </Link>
             </div>
