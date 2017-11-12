@@ -1,6 +1,8 @@
 # Scorebored
 
-Work in progress. Time to make the donuts. 
+[![Build Status](https://travis-ci.org/scorebored/scorebored.svg?branch=master)](https://travis-ci.org/scorebored/scorebored)
+
+Work in progress. Time to make the donuts.
 
 Install:
 
@@ -10,7 +12,7 @@ Install:
 To install deps:
 
 ```bash
-yarn 
+yarn
 ```
 
 To start:
