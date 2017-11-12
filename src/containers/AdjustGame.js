@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     adjustScore: (points0, points1) => {
-        dispatch(matchActions.adjustScore(points0, points1));
+        dispatch(matchActions.adjustScore([points0, points1]));
     },
     done: () => {
         ownProps.history.push("/scoreboard");
