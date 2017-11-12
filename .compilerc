@@ -1,5 +1,6 @@
 {
   "application/javascript": {
+    "sourceMaps": "inline",
     "presets": [
       "es2017-node7",
       "react"

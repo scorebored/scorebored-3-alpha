@@ -1,41 +1,46 @@
-import { createAction, handleActions } from "redux-actions";
-import { createSelector } from "reselect";
+import {createAction, handleActions} from "redux-actions";
+import {createSelector} from "reselect";
+
+import {otherPlayer} from "@/util/player";
 
 const defaultState = {
     player0: {
+        id: "player0",
         name: "Home Team",
         sayAs: null,
         points: 0,
         games: 0,
+        server: false,
     },
     player1: {
+        id: "player1",
         name: "Away Team",
         sayAs: null,
         points: 0,
         games: 0,
+        server: false,
     },
     length: 1,
     gameLength: 11,
     currentGame: 1,
-    server: null,
 };
 
-export const adjustPoints = createAction("match/adjustPoints");
+export const adjustScore = createAction("match/adjustScore");
 export const gameLength = createAction("match/gameLength");
-export const server = createAction("match/server");
-export const score = createAction("match/score");
+export const setServer = createAction("match/setServer");
+export const awardPoint = createAction("match/awardPoint");
 
-export const reducer = handleActions({
-    [adjustPoints]: (state, action) => ({
+export default handleActions({
+    [adjustScore]: (state, action) => ({
         ...state,
-        player0: { ...state.player0, points: action.payload[0] },
-        player1: { ...state.player1, points: action.payload[1] },
+        player0: {...state.player0, points: action.payload[0]},
+        player1: {...state.player1, points: action.payload[1]},
     }),
     [gameLength]: (state, action) => ({
         ...state,
         gameLength: action.payload
     }),
-    [score]: (state, action) => {
+    [awardPoint]: (state, action) => {
         if (isGameOver(state)) {
             return state;
         }
@@ -48,10 +53,15 @@ export const reducer = handleActions({
             }
         };
     },
-    [server]: (state, action) => ({
-        ...state, 
-        server: action.payload 
-    }),
+    [setServer]: (state, action) => {
+        const serving = state[action.payload];
+        const notServing = state[otherPlayer(action.payload)];
+        return {
+            ...state,
+            [serving.id]: {...state[serving.id], server: true},
+            [notServing.id]: {...state[notServing.id], server: false},
+        };
+    },
 }, defaultState);
 
 const isGameOver = (match) => {
