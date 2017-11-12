@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(matchActions.adjustScore([points0, points1]));
     },
     done: () => {
-        ownProps.history.push("/scoreboard");
+        ownProps.history.goBack();
     },
 });
 
