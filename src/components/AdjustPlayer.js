@@ -13,7 +13,7 @@ const AdjustPlayer = (props) => (
         <input
             name={props.player.id}
             type="checkbox"
-            value={props.player.server}
+            checked={props.player.server}
             onChange={props.onServerChange}
         />
         {props.player.error &&

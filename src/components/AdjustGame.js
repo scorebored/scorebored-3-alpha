@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {otherPlayer} from "@/util/player";
 import AdjustPlayer from "@/components/AdjustPlayer";
 
 class AdjustGame extends React.Component {
@@ -8,8 +9,8 @@ class AdjustGame extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            player0: {points: 0},
-            player1: {points: 0},
+            player0: {points: 0, server: false},
+            player1: {points: 0, server: false},
         };
     }
 
@@ -37,7 +38,23 @@ class AdjustGame extends React.Component {
         });
     }
 
-    serverChanged = () => {
+    serverChanged = (event) => {
+        const id = event.target.name;
+        const other = otherPlayer(id);
+        this.setState({
+            [id]: {
+                ...this.state[id],
+                server: event.target.checked
+            }
+        });
+        if (event.target.checked) {
+            this.setState({
+                [other]: {
+                    ...this.state[other],
+                    server: false,
+                }
+            });
+        }
     }
 
     adjust = () => {
