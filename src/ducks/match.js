@@ -1,5 +1,4 @@
 import {createAction, handleActions} from "redux-actions";
-import {createSelector} from "reselect";
 
 import {otherPlayer} from "@/util/player";
 
@@ -45,13 +44,17 @@ export default handleActions({
             return state;
         }
         const previous = state[action.payload];
-        return {
+        const newState = {
             ...state,
             [action.payload]: {
                 ...previous,
                 points: previous.points + 1
             }
         };
+        if (isServiceChange(newState)) {
+            switchServers(newState);
+        }
+        return newState;
     },
     [setServer]: (state, action) => {
         const serving = state[action.payload];
@@ -64,9 +67,10 @@ export default handleActions({
     },
 }, defaultState);
 
-const isGameOver = (match) => {
+export const isGameOver = (match) => {
     const p0 = match.player0.points;
     const p1 = match.player1.points;
+
     if (p0 < match.gameLength && p1 < match.gameLength) {
         return false;
     }
@@ -76,7 +80,33 @@ const isGameOver = (match) => {
     return true;
 };
 
-export const gameOver = createSelector(
-    (state) => state.match,
-    (match) => isGameOver(match),
-);
+export const isOvertime = (match) => {
+    const p0 = match.player0.points;
+    const p1 = match.player1.points;
+
+    if (isGameOver(match)) {
+        return false;
+    }
+    if (p0 >= match.gameLength || p1 >= match.gameLength) {
+        return true;
+    }
+    return false;
+};
+
+export const isServiceChange = (match) => {
+    const total = match.player0.points + match.player1.points;
+    if (!isOvertime(match)) {
+        if (match.gameLength === 21) {
+            return total % 5 === 0;
+        }
+        return total % 2 === 0;
+    }
+    return true;
+};
+
+const switchServers = (match) => {
+    match.player0.server = !match.player0.server;
+    match.player1.server = !match.player1.server;
+};
+
+

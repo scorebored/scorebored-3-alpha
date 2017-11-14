@@ -8,7 +8,7 @@
     "test": "jest && yarn lint",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "lint": "eslint --cache --color --ext .jsx,.js src"
+    "lint": "eslint --cache --color --ext .js src"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
@@ -39,8 +39,7 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
-    "redux-actions": "^2.2.1",
-    "reselect": "^3.0.1"
+    "redux-actions": "^2.2.1"
   },
   "config": {
     "forge": {
