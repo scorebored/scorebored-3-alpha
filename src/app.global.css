@@ -1,0 +1,9 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+.center_shit {
+    margin: 20px 40%;
+}
+
+.give_me_space {
+    margin: 0 5px;
+}
