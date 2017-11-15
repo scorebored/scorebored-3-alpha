@@ -1,5 +1,5 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React from 'react';
+import {Link} from 'react-router-dom';
 //import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 var tableStyle = {
@@ -18,8 +18,8 @@ class MainMenu extends React.Component {
 
     render = () => {
         return (
-            <div className="page">
-                <div className="center_shit">
+            <div className='page'>
+                <div className='center_shit'>
                     <div>
                         <img src={`${__dirname}/../resources/S2_ping_pong.png`}/>
                     </div>
@@ -28,11 +28,11 @@ class MainMenu extends React.Component {
                             <tr>
                                 <td>
                                     <div className='form-horizontal give_me_space'>
-                                        <label className="control-label" htmlFor="startMatch">
+                                        <label className='control-label' htmlFor='startMatch'>
                                             New Match
                                         </label>
                                         <div>
-                                            <Link id='startMatch' to="/start">
+                                            <Link id='startMatch' to='/start'>
                                                 <img src={`${__dirname}/../resources/paddle-transparent.png`}/>
                                             </Link>
                                         </div>
@@ -40,12 +40,12 @@ class MainMenu extends React.Component {
                                 </td>
                                 <td>
                                     <div className='form-horizontal give_me_space'>
-                                        <label  style={center_jacob} className="control-label"
-                                        htmlFor="j_excuses">
+                                        <label  style={center_jacob} className='control-label'
+                                        htmlFor='j_excuses'>
                                             Excuses
                                         </label>
                                         <div>
-                                            <Link id="j_excuses" to="/excuses">
+                                            <Link id='j_excuses' to='/excuses'>
                                                 <img style={roundCorners}
                                                 src={`${__dirname}/../resources/jacob.png`}/>
                                             </Link>
@@ -57,8 +57,8 @@ class MainMenu extends React.Component {
                     </table>
                 </div>
                 {/*
-                <Button bsSize="large" bsStyle="link">
-                    <Link to="/excuses">Excuses
+                <Button bsSize='large' bsStyle='link'>
+                    <Link to='/excuses'>Excuses
                     </Link>
                 </Button>*/}
             </div>

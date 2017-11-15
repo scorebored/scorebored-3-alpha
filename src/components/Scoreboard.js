@@ -1,27 +1,27 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-import PlayerDisplay from "@/components/PlayerDisplay";
+import PlayerDisplay from '@/components/PlayerDisplay';
 
 export default class Scoreboard extends React.Component {
 
     componentDidMount = () => {
-        window.addEventListener("keyup", this.keyPressed);
+        window.addEventListener('keyup', this.keyPressed);
     }
 
     componentWillUnmount = () => {
-        window.removeEventListener("keyup", this.keyPressed);
+        window.removeEventListener('keyup', this.keyPressed);
     }
 
     render = () => {
         return (
-            <div className="page">
+            <div className='page'>
                 <ul>
                     <li><PlayerDisplay player={this.props.player0} /></li>
                     <li><PlayerDisplay player={this.props.player1} /></li>
                 </ul>
-                <Link to="/adjust">
+                <Link to='/adjust'>
                     <button>Adjust scores</button>
                 </Link>
             </div>
@@ -29,11 +29,11 @@ export default class Scoreboard extends React.Component {
     }
 
     keyPressed = (event) => {
-        if (event.key === "ArrowLeft") {
-            this.update("player0");
+        if (event.key === 'ArrowLeft') {
+            this.update('player0');
         }
-        if (event.key === "ArrowRight") {
-            this.update("player1");
+        if (event.key === 'ArrowRight') {
+            this.update('player1');
         }
     }
 

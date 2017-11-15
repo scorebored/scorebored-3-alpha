@@ -1,18 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const AdjustPlayer = (props) => (
     <li>
         <input
             name={props.player.id}
-            type="text"
+            type='text'
             value={props.player.points}
             onChange={props.onScoreChange}
         />
         {props.player.name}
         <input
             name={props.player.id}
-            type="checkbox"
+            type='checkbox'
             checked={props.player.server}
             onChange={props.onServerChange}
         />

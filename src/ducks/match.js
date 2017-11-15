@@ -1,19 +1,19 @@
-import {createAction, handleActions} from "redux-actions";
+import {createAction, handleActions} from 'redux-actions';
 
-import {otherPlayer} from "@/util/player";
+import {otherPlayer} from '@/util/player';
 
 const defaultState = {
     player0: {
-        id: "player0",
-        name: "Home Team",
+        id: 'player0',
+        name: 'Home Team',
         sayAs: null,
         points: 0,
         games: 0,
         server: false,
     },
     player1: {
-        id: "player1",
-        name: "Away Team",
+        id: 'player1',
+        name: 'Away Team',
         sayAs: null,
         points: 0,
         games: 0,
@@ -24,10 +24,10 @@ const defaultState = {
     currentGame: 1,
 };
 
-export const adjustScore = createAction("match/adjustScore");
-export const gameLength = createAction("match/gameLength");
-export const setServer = createAction("match/setServer");
-export const awardPoint = createAction("match/awardPoint");
+export const adjustScore = createAction('match/adjustScore');
+export const gameLength = createAction('match/gameLength');
+export const setServer = createAction('match/setServer');
+export const awardPoint = createAction('match/awardPoint');
 
 export default handleActions({
     [adjustScore]: (state, action) => ({

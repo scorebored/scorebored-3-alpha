@@ -1,12 +1,12 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 class Excuses extends React.Component {
     render = () => {
         return (
             <div>
                 <h3>Excuses</h3>
-                <Link to="/">
+                <Link to='/'>
                     <button>Back</button>
                 </Link>
                 <ul>

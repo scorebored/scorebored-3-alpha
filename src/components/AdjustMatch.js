@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
-import * as actions from "@/match";
+import * as actions from '@/match';
 
 class AdjustMatch extends React.Component {
 
@@ -59,7 +59,7 @@ class AdjustMatch extends React.Component {
         }
 
         this.props.dispatch(actions.adjustPoints([p0, p1]));
-        this.props.history.push("/display");
+        this.props.history.push('/display');
     }
 
     render = () => {
@@ -69,7 +69,7 @@ class AdjustMatch extends React.Component {
                 <h3>Adjust Match</h3>
                 <ul>
                     <li>
-                        <input type="text" value={this.state.points0}
+                        <input type='text' value={this.state.points0}
                                onChange={this.updatePoints0} />
                         {match.player0.name}
                         {this.state.errorPoints0 &&
@@ -77,7 +77,7 @@ class AdjustMatch extends React.Component {
                         }
                     </li>
                     <li>
-                        <input type="text" value={this.state.points1}
+                        <input type='text' value={this.state.points1}
                                onChange={this.updatePoints1} />
                         {match.player1.name}
                         {this.state.errorPoints1 &&
@@ -85,7 +85,7 @@ class AdjustMatch extends React.Component {
                         }
                     </li>
                 </ul>
-                <Link to="/display">
+                <Link to='/display'>
                     <button>Cancel</button>
                 </Link>
                 <button onClick={this.adjust}>Adjust</button>

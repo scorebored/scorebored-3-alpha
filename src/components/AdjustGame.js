@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import {otherPlayer} from "@/util/player";
-import AdjustPlayer from "@/components/AdjustPlayer";
+import {otherPlayer} from '@/util/player';
+import AdjustPlayer from '@/components/AdjustPlayer';
 
 class AdjustGame extends React.Component {
 
@@ -23,8 +23,8 @@ class AdjustGame extends React.Component {
                 }
             });
         };
-        init("player0");
-        init("player1");
+        init('player0');
+        init('player1');
     }
 
     scoreChanged = (event) => {
@@ -58,8 +58,8 @@ class AdjustGame extends React.Component {
     }
 
     adjust = () => {
-        const [p0, err0] = this.validateScore("player0");
-        const [p1, err1] = this.validateScore("player1");
+        const [p0, err0] = this.validateScore('player0');
+        const [p1, err1] = this.validateScore('player1');
 
         if (err0 || err1) {
             return;
