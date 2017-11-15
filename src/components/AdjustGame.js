@@ -6,15 +6,7 @@ import AdjustPlayer from '@/components/AdjustPlayer'
 
 class AdjustGame extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            player0: {points: 0, server: false},
-            player1: {points: 0, server: false},
-        }
-    }
-
-    componentDidMount = () => {
+    componentWillMount = () => {
         const init = (player) => {
             this.setState({
                 [player]: {
