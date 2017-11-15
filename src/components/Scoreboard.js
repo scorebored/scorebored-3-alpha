@@ -26,7 +26,7 @@ export default class Scoreboard extends React.Component {
 
     render = () => {
         return (
-            <div style={styles.page}>
+            <div className="page">
                 <ul>
                     <li><PlayerDisplay player={this.props.player0} /></li>
                     <li><PlayerDisplay player={this.props.player1} /></li>
@@ -66,8 +66,3 @@ Scoreboard.propTypes = {
     awardPoint: PropTypes.func.isRequired,
     setServer: PropTypes.func.isRequired,
 };
-
-
-
-
-

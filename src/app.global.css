@@ -1,9 +1,25 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 .center_shit {
-    margin: 20px 40%;
+    margin: 10% 40% 0 40%;
 }
 
 .give_me_space {
+    margin: 0 5px;
+}
+
+.main_background {
+    background-color: #b0b1ae;
+}
+
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.drop_down {
     margin: 0 5px;
 }
