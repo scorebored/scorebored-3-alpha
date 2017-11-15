@@ -4,16 +4,6 @@ import {Link} from "react-router-dom";
 
 import PlayerDisplay from "@/components/PlayerDisplay";
 
-const styles = {
-    page: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-    },
-};
-
 export default class Scoreboard extends React.Component {
 
     componentDidMount = () => {
