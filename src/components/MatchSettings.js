@@ -1,6 +1,6 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import { /*Navbar, Jumbotron,*/ Button, DropdownButton, MenuItem } from 'react-bootstrap';
+import React from 'react'
+import {Link} from 'react-router-dom'
+import { /*Navbar, Jumbotron,*/ Button, DropdownButton, MenuItem } from 'react-bootstrap'
 
 class MatchSettings extends React.Component {
     render = () => {
@@ -34,8 +34,8 @@ class MatchSettings extends React.Component {
                     <Button bsStyle='primary'>Show me the scores</Button>
                 </Link>
             </div>
-        );
+        )
     }
 }
 
-export default MatchSettings;
+export default MatchSettings

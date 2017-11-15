@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
-import PlayerDisplay from '@/components/PlayerDisplay';
+import PlayerDisplay from '@/components/PlayerDisplay'
 
 export default class Scoreboard extends React.Component {
 
     componentDidMount = () => {
-        window.addEventListener('keyup', this.keyPressed);
+        window.addEventListener('keyup', this.keyPressed)
     }
 
     componentWillUnmount = () => {
-        window.removeEventListener('keyup', this.keyPressed);
+        window.removeEventListener('keyup', this.keyPressed)
     }
 
     render = () => {
@@ -25,15 +25,15 @@ export default class Scoreboard extends React.Component {
                     <button>Adjust scores</button>
                 </Link>
             </div>
-        );
+        )
     }
 
     keyPressed = (event) => {
         if (event.key === 'ArrowLeft') {
-            this.update('player0');
+            this.update('player0')
         }
         if (event.key === 'ArrowRight') {
-            this.update('player1');
+            this.update('player1')
         }
     }
 
@@ -41,11 +41,11 @@ export default class Scoreboard extends React.Component {
         const hasServer = (
             this.props.player0.server ||
             this.props.player1.server
-        );
+        )
         if (hasServer) {
-            this.props.awardPoint(player);
+            this.props.awardPoint(player)
         } else {
-            this.props.setServer(player);
+            this.props.setServer(player)
         }
     }
 }
@@ -55,4 +55,4 @@ Scoreboard.propTypes = {
     player1: PropTypes.object.isRequired,
     awardPoint: PropTypes.func.isRequired,
     setServer: PropTypes.func.isRequired,
-};
+}

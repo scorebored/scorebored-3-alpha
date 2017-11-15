@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import match from '@/ducks/match';
+import match from '@/ducks/match'
 
 export default combineReducers({
     match
-});
+})

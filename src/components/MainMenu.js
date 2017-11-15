@@ -1,19 +1,19 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-//import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+import React from 'react'
+import {Link} from 'react-router-dom'
+//import { Navbar, Jumbotron, Button } from 'react-bootstrap'
 
 var tableStyle = {
     border: 'none',
     margin: '0 5%'
-};
+}
 
 var roundCorners = {
     borderRadius: '10px'
-};
+}
 
 let center_jacob = {
     margin: '0 10px'
-};
+}
 class MainMenu extends React.Component {
 
     render = () => {
@@ -62,8 +62,8 @@ class MainMenu extends React.Component {
                     </Link>
                 </Button>*/}
             </div>
-        );
+        )
     }
 }
 
-export default MainMenu;
+export default MainMenu

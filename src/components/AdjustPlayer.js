@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const AdjustPlayer = (props) => (
     <li>
@@ -17,15 +17,15 @@ const AdjustPlayer = (props) => (
             onChange={props.onServerChange}
         />
         {props.player.error &&
-            <b>&nbsp; Invalid</b>
+            <b>&nbsp Invalid</b>
         }
     </li>
-);
+)
 
 AdjustPlayer.propTypes = {
     player: PropTypes.object.isRequired,
     onScoreChange: PropTypes.func.isRequired,
     onServerChange: PropTypes.func.isRequired,
-};
+}
 
-export default AdjustPlayer;
+export default AdjustPlayer

@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React from 'react'
+import {Link} from 'react-router-dom'
 
 class Excuses extends React.Component {
     render = () => {
@@ -10,8 +10,8 @@ class Excuses extends React.Component {
                     <button>Back</button>
                 </Link>
                 <ul>
-                    <li>Your shirt is white or orange, can&rsquo;t see the ball when
-                        it&rsquo;s in front of your shirt</li>
+                    <li>Your shirt is white or orange, can&rsquot see the ball when
+                        it&rsquos in front of your shirt</li>
                     <li>My back hurts</li>
                     <li>I let him win</li>
                     <li>The lighting was bad</li>
@@ -24,8 +24,8 @@ class Excuses extends React.Component {
                     <li>I was blowing my thing</li>
                 </ul>
             </div>
-        );
+        )
     }
 }
 
-export default Excuses;
+export default Excuses
