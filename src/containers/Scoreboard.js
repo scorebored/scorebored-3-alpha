@@ -19,6 +19,9 @@ const mapDispatchToProps = (dispatch) => ({
     undo: () => {
         dispatch(matchActions.undo())
     },
+    redo: () => {
+        dispatch(matchActions.redo())
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scoreboard)

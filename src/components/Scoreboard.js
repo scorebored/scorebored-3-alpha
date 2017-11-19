@@ -43,8 +43,11 @@ export default class Scoreboard extends React.Component {
         if (event.key === 'ArrowRight') {
             this.update(1)
         }
-        if (event.key === 'Backspace') {
+        if (event.key === 'Backspace' && !event.ctrlKey) {
             this.props.undo()
+        }
+        if (event.key === 'Backspace' && event.ctrlKey) {
+            this.props.redo()
         }
     }
 
@@ -65,4 +68,5 @@ Scoreboard.propTypes = {
     awardPoint: PropTypes.func.isRequired,
     firstServer: PropTypes.func.isRequired,
     undo: PropTypes.func.isRequired,
+    redo: PropTypes.func.isRequired,
 }

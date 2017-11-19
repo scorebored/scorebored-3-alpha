@@ -29,6 +29,7 @@ export const settings = createAction('scorebored/match/SETTINGS')
 export const firstServer = createAction('scorebored/match/FIRST_SERVER')
 export const awardPoint = createAction('scorebored/mattch/AWARD_POINT')
 export const undo = createAction('scorebored/match/UNDO')
+export const redo = createAction('scorebored/match/REDO')
 
 export default handleActions({
     [adjust]: (state, action) => {
@@ -84,7 +85,19 @@ export default handleActions({
         return {
             ...state,
             game: previous,
-            undo: state.undo.slice(0, state.undo.length - 1)
+            undo: state.undo.slice(0, state.undo.length - 1),
+            redo: state.redo.concat(state.game),
+        }
+    },
+    [redo]: (state) => {
+        if (state.redo.length === 0) {
+            return state
+        }
+        const next = state.redo[state.redo.length - 1]
+        return {
+            ...state,
+            game: next,
+            redo: state.redo.slice(0, state.redo.length - 1),
         }
     }
 }, defaultState)
@@ -133,7 +146,8 @@ const switchServers = (match) => {
 const undoable = (state) => {
     const newState = {
         ...state,
-        undo: state.undo.slice()
+        undo: state.undo.slice(),
+        redo: [],
     }
     newState.undo.push(state.game)
     return newState
