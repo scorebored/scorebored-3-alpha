@@ -1,9 +1,9 @@
 export const otherPlayer = (player) => {
-    if (player === 'player0') {
-        return 'player1'
+    if (player === 0 || player === '0') {
+        return 1
     }
-    if (player === 'player1') {
-        return 'player0'
+    if (player === 1 || player === '1') {
+        return 0
     }
     throw new Error('invalid player: ' + player)
 }

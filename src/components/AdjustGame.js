@@ -7,23 +7,29 @@ import AdjustPlayer from '@/components/AdjustPlayer'
 class AdjustGame extends React.Component {
 
     componentWillMount = () => {
-        const init = (player) => {
-            this.setState({
-                [player]: {
-                    ...this.props[player],
-                    error: false
-                }
-            })
-        }
-        init('player0')
-        init('player1')
+        this.setState({
+            0: {
+                id: 0,
+                name: this.props.players[0].name,
+                points: this.props.points[0],
+                server: this.props.server === 0,
+                error: false,
+            },
+            1: {
+                id: 1,
+                name: this.props.players[1].name,
+                points: this.props.points[1],
+                server: this.props.server === 1,
+                error: false,
+            },
+        })
     }
 
     scoreChanged = (event) => {
-        const player = event.target.name
+        const playerId = event.target.name
         this.setState({
-            [player]: {
-                ...this.state[player],
+            [playerId]: {
+                ...this.state[playerId],
                 points: event.target.value,
                 error: false,
             }
@@ -31,32 +37,31 @@ class AdjustGame extends React.Component {
     }
 
     serverChanged = (event) => {
-        const id = event.target.name
-        const other = otherPlayer(id)
+        const playerId = event.target.name
+        const otherId = otherPlayer(playerId)
         this.setState({
-            [id]: {
-                ...this.state[id],
+            [playerId]: {
+                ...this.state[playerId],
                 server: event.target.checked
             }
         })
-        if (event.target.checked) {
-            this.setState({
-                [other]: {
-                    ...this.state[other],
-                    server: false,
-                }
-            })
-        }
+        this.setState({
+            [otherId]: {
+                ...this.state[otherId],
+                server: !event.target.checked,
+            }
+        })
     }
 
     adjust = () => {
-        const [p0, err0] = this.validateScore('player0')
-        const [p1, err1] = this.validateScore('player1')
+        const [p0, err0] = this.validateScore(0)
+        const [p1, err1] = this.validateScore(1)
+        const server = this.state[0].server ? 0 : 1
 
         if (err0 || err1) {
             return
         }
-        this.props.adjustScore(p0, p1)
+        this.props.adjust({points: [p0, p1], server})
         this.props.done()
     }
 
@@ -64,12 +69,12 @@ class AdjustGame extends React.Component {
         this.props.done()
     }
 
-    validateScore = (player) => {
-        let p = Number.parseInt(this.state[player].points, 10)
+    validateScore = (playerId) => {
+        let p = Number.parseInt(this.state[playerId].points, 10)
         if (Number.isNaN(p) || p < 0 || p >= this.props.gameLength) {
             this.setState({
-                [player]: {
-                    ...this.state[player],
+                [playerId]: {
+                    ...this.state[playerId],
                     error: true
                 }
             })
@@ -84,12 +89,12 @@ class AdjustGame extends React.Component {
                 <h3>Adjust Match</h3>
                 <ul>
                     <AdjustPlayer
-                        player={this.state.player0}
+                        form={this.state[0]}
                         onScoreChange={this.scoreChanged}
                         onServerChange={this.serverChanged}
                     />
                     <AdjustPlayer
-                        player={this.state.player1}
+                        form={this.state[1]}
                         onScoreChange={this.scoreChanged}
                         onServerChange={this.serverChanged}
                     />
@@ -104,11 +109,12 @@ class AdjustGame extends React.Component {
 export default AdjustGame
 
 AdjustGame.propTypes = {
-    player0: PropTypes.object.isRequired,
-    player1: PropTypes.object.isRequired,
-    gameLength: PropTypes.number.isRequired,
+    players: PropTypes.array.isRequired,
+    points: PropTypes.array.isRequired,
+    server: PropTypes.number.isRequired,
+    gameLength: PropTypes.number.gameLength,
 
-    adjustScore: PropTypes.func.isRequired,
+    adjust: PropTypes.func.isRequired,
     done: PropTypes.func.isRequired,
 }
 

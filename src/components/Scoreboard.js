@@ -18,8 +18,16 @@ export default class Scoreboard extends React.Component {
         return (
             <div className='page'>
                 <ul>
-                    <li><PlayerDisplay player={this.props.player0} /></li>
-                    <li><PlayerDisplay player={this.props.player1} /></li>
+                    <li><PlayerDisplay
+                            name={this.props.players[0].name}
+                            points={this.props.points[0]}
+                            serving={this.props.server === 0}/>
+                    </li>
+                    <li><PlayerDisplay
+                            name={this.props.players[1].name}
+                            points={this.props.points[1]}
+                            serving={this.props.server === 1}/>
+                    </li>
                 </ul>
                 <Link to='/adjust'>
                     <button>Adjust scores</button>
@@ -30,29 +38,27 @@ export default class Scoreboard extends React.Component {
 
     keyPressed = (event) => {
         if (event.key === 'ArrowLeft') {
-            this.update('player0')
+            this.update(0)
         }
         if (event.key === 'ArrowRight') {
-            this.update('player1')
+            this.update(1)
         }
     }
 
-    update = (player) => {
-        const hasServer = (
-            this.props.player0.server ||
-            this.props.player1.server
-        )
-        if (hasServer) {
-            this.props.awardPoint(player)
+    update = (playerId) => {
+        if (this.props.server !== null) {
+            this.props.awardPoint(playerId)
         } else {
-            this.props.setServer(player)
+            this.props.firstServer(playerId)
         }
     }
 }
 
 Scoreboard.propTypes = {
-    player0: PropTypes.object.isRequired,
-    player1: PropTypes.object.isRequired,
+    players: PropTypes.array.isRequired,
+    points: PropTypes.array.isRequired,
+    server: PropTypes.number,
+
     awardPoint: PropTypes.func.isRequired,
-    setServer: PropTypes.func.isRequired,
+    firstServer: PropTypes.func.isRequired,
 }

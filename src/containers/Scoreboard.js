@@ -4,16 +4,17 @@ import Scoreboard from '@/components/Scoreboard'
 import * as matchActions from '@/ducks/match'
 
 const mapStateToProps = (state) => ({
-    player0: state.match.player0,
-    player1: state.match.player1,
+    players: state.match.settings.players,
+    points: state.match.game.points,
+    server: state.match.game.server,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    awardPoint: (player) => {
-        dispatch(matchActions.awardPoint(player))
+    awardPoint: (playerId) => {
+        dispatch(matchActions.awardPoint(playerId))
     },
-    setServer: (player) => {
-        dispatch(matchActions.setServer(player))
+    firstServer: (playerId) => {
+        dispatch(matchActions.firstServer(playerId))
     },
 })
 

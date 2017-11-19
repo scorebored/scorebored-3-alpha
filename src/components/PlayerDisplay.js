@@ -2,18 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const PlayerDisplay = (props) => {
-    const {player} = props
     return (
         <span>
-            &nbsp; {player.points}
-            &nbsp; {player.name}
-            &nbsp; {player.server && <span>&lt;===</span>}
+            &nbsp; {props.points}
+            &nbsp; {props.name}
+            &nbsp; {props.serving && <span>&lt;===</span>}
         </span>
     )
 }
 
 PlayerDisplay.propTypes = {
-    player: PropTypes.object.isRequired
+    name: PropTypes.string.isRequired,
+    points: PropTypes.number.isRequired,
+    serving: PropTypes.bool,
 }
 
 export default PlayerDisplay
