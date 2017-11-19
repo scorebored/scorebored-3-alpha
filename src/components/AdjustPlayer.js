@@ -17,7 +17,7 @@ const AdjustPlayer = (props) => (
             onChange={props.onServerChange}
         />
         {props.player.error &&
-            <b>&nbsp Invalid</b>
+            <b>&nbsp; Invalid</b>
         }
     </li>
 )
