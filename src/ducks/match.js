@@ -1,5 +1,5 @@
 import {createAction, handleActions} from 'redux-actions'
-
+import deepEqual from 'deep-equal'
 import {otherPlayer} from '@/util/player'
 
 const defaultState = {
@@ -24,19 +24,24 @@ const defaultState = {
     redo: [],
 }
 
-export const adjust = createAction('match/adjust')
-export const settings = createAction('match/settings')
-export const firstServer = createAction('match/firstServer')
-export const awardPoint = createAction('match/awardPoint')
+export const adjust = createAction('scorebored/match/ADJUST')
+export const settings = createAction('scorebored/match/SETTINGS')
+export const firstServer = createAction('scorebored/match/FIRST_SERVER')
+export const awardPoint = createAction('scorebored/mattch/AWARD_POINT')
+export const undo = createAction('scorebored/match/UNDO')
 
 export default handleActions({
-    [adjust]: (state, action) => ({
-        ...state,
-        game: {
+    [adjust]: (state, action) => {
+        if (deepEqual(state.game, {...state.game, ...action.payload})) {
+            return state
+        }
+        const newState = undoable(state)
+        newState.game = {
             ...state.game,
             ...action.payload,
         }
-    }),
+        return newState
+    },
     [settings]: (state, action) => ({
         ...state,
         settings: {
@@ -48,12 +53,10 @@ export default handleActions({
         if (isGameOver(state)) {
             return state
         }
-        const newState = {
-            ...state,
-            game: {
-                ...state.game,
-                points: state.game.points.slice(),
-            },
+        const newState = undoable(state)
+        newState.game = {
+            ...state.game,
+            points: state.game.points.slice(),
         }
         newState.game.points[action.payload] += 1
         if (isServiceChange(newState)) {
@@ -62,16 +65,28 @@ export default handleActions({
         return newState
     },
     [firstServer]: (state, action) => {
-        const newState = {
-            ...state,
-            game: {
-                ...state.game,
-                server: action.payload,
-                firstServer: action.payload,
-            }
+        if (state.game.firstServer !== null) {
+            return
+        }
+        const newState = undoable(state)
+        newState.game = {
+            ...state.game,
+            server: action.payload,
+            firstServer: action.payload,
         }
         return newState
     },
+    [undo]: (state) => {
+        if (state.undo.length === 0) {
+            return state
+        }
+        const previous = state.undo[state.undo.length - 1]
+        return {
+            ...state,
+            game: previous,
+            undo: state.undo.slice(0, state.undo.length - 1)
+        }
+    }
 }, defaultState)
 
 export const isGameOver = (match) => {
@@ -115,4 +130,11 @@ const switchServers = (match) => {
     match.game.server = otherPlayer(match.game.server)
 }
 
-
+const undoable = (state) => {
+    const newState = {
+        ...state,
+        undo: state.undo.slice()
+    }
+    newState.undo.push(state.game)
+    return newState
+}

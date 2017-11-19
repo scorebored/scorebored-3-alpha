@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
     firstServer: (playerId) => {
         dispatch(matchActions.firstServer(playerId))
     },
+    undo: () => {
+        dispatch(matchActions.undo())
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scoreboard)
