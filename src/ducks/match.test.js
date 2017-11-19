@@ -47,6 +47,35 @@ describe('isGameOver, 21 point game', () => {
     })
 })
 
+describe('isMatchOver', () => {
+    test('should be false with no wins', () => {
+        dispatch(match.settings({length: 1, gameLength: 11}))
+        dispatch(match.adjust({points: [7, 9]}))
+        expect(match.isMatchOver(state())).toBe(false)
+    })
+    test('should be true when first game is over in one game match', () => {
+        dispatch(match.settings({length: 1, gameLength: 11}))
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({points: [7, 10]}))
+        dispatch(match.awardPoint(1))
+        expect(match.isMatchOver(state())).toBe(true)
+    })
+    test('should be false when first game is over in three game match', () => {
+        dispatch(match.settings({length: 3, gameLength: 11}))
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({points: [7, 10]}))
+        dispatch(match.awardPoint(1))
+        expect(match.isMatchOver(state())).toBe(false)
+    })
+    test('should be true when third game is over in three game match', () => {
+        dispatch(match.settings({length: 3, gameLength: 11}))
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({points: [7, 10], wins: [1, 1]}))
+        dispatch(match.awardPoint(1))
+        expect(match.isMatchOver(state())).toBe(true)
+    })
+})
+
 describe('awardPoint', () => {
     test('should increment score', () => {
         dispatch(match.firstServer(1))
@@ -82,6 +111,14 @@ describe('awardPoint', () => {
         dispatch(match.awardPoint(0))
         expect(state().game.points).toEqual([22, 21])
         expect(state().game.server).toBe(1)
+    })
+    test('should award win when game is over', () => {
+        dispatch(match.settings({gameLength: 11}))
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({points: [7, 10]}))
+        dispatch(match.awardPoint(1))
+        expect(state().game.points).toEqual([7, 11])
+        expect(state().game.wins).toEqual([0, 1])
     })
 })
 

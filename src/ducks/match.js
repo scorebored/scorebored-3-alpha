@@ -16,7 +16,7 @@ const defaultState = {
     },
     game: {
         points: [0, 0],
-        won: [0, 0],
+        wins: [0, 0],
         server: null,
         firstServer: null,
     },
@@ -60,8 +60,12 @@ export default handleActions({
             points: state.game.points.slice(),
         }
         newState.game.points[action.payload] += 1
-        if (isServiceChange(newState)) {
+        if (!isGameOver(newState) && isServiceChange(newState)) {
             switchServers(newState)
+        }
+        if (isGameOver(newState)) {
+            newState.game.wins = newState.game.wins.slice()
+            newState.game.wins[action.payload] += 1
         }
         return newState
     },
@@ -110,6 +114,14 @@ export const isGameOver = (match) => {
         return false
     }
     if (Math.abs(p0 - p1) < 2) {
+        return false
+    }
+    return true
+}
+
+export const isMatchOver = (match) => {
+    const total = match.game.wins[0] + match.game.wins[1]
+    if (total < match.settings.length) {
         return false
     }
     return true
