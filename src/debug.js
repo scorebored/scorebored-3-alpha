@@ -1,4 +1,4 @@
-import { store } from '@/store'
+import { store } from './store'
 //import * as matchActions from '@/match'
 
 export default () => {

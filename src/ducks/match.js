@@ -1,6 +1,6 @@
 import {createAction, handleActions} from 'redux-actions'
 import deepEqual from 'deep-equal'
-import {otherPlayer} from '@/util/player'
+import {otherPlayer} from '../util/player'
 
 const defaultState = {
     settings: {

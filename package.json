@@ -2,13 +2,14 @@
   "name": "scorebored",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
     "test": "jest && yarn lint",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "lint": "eslint --cache --color --ext .js src"
+    "lint": "eslint --cache --color --ext .js src",
+    "clean": "rm -rf out"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
@@ -31,6 +32,7 @@
     "redux-devtools": "^3.4.0"
   },
   "dependencies": {
+    "babel-plugin-root-import": "^5.1.0",
     "bootstrap": "^3.3.7",
     "deep-equal": "^1.0.1",
     "electron-compile": "^6.4.2",

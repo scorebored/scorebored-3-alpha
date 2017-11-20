@@ -1,18 +1,19 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-import debug from '@/debug'
-
-const render = () => {
-    const Root = require('./components/Root').default
-    ReactDOM.render(<AppContainer><Root /></AppContainer>,
-        document.getElementById('root'))
-}
-
-render()
+import debug from './debug'
 
 if (module.hot) {
+    const render = () => {
+        const Root = require('./components/Root').default
+        const {AppContainer} = require('react-hot-loader')
+        ReactDOM.render(<AppContainer><Root /></AppContainer>,
+            document.getElementById('root'))
+    }
+    render()
     module.hot.accept(render)
+} else {
+    const Root = require('./components/Root').default
+    ReactDOM.render(<Root />, document.getElementById('root'))
 }
 
 debug()

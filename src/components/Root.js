@@ -2,12 +2,12 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 
-import {store} from '@/store'
-import AdjustGame from '@/containers/AdjustGame'
-import Excuses from '@/components/Excuses'
-import MainMenu from '@/components/MainMenu'
-import MatchSettings from '@/components/MatchSettings'
-import Scoreboard from '@/containers/Scoreboard'
+import {store} from '../store'
+import AdjustGame from '../containers/AdjustGame'
+import Excuses from './Excuses'
+import MainMenu from './MainMenu'
+import MatchSettings from './MatchSettings'
+import Scoreboard from '../containers/Scoreboard'
 
 class Root extends React.Component {
     render = () => {

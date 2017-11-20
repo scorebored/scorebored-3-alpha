@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {otherPlayer} from '@/util/player'
-import AdjustPlayer from '@/components/AdjustPlayer'
+import {otherPlayer} from '../util/player'
+import AdjustPlayer from './AdjustPlayer'
 
 class AdjustGame extends React.Component {
 
@@ -111,8 +111,8 @@ export default AdjustGame
 AdjustGame.propTypes = {
     players: PropTypes.array.isRequired,
     points: PropTypes.array.isRequired,
-    server: PropTypes.number.isRequired,
-    gameLength: PropTypes.number.gameLength,
+    server: PropTypes.number,
+    gameLength: PropTypes.number.isRequired,
 
     adjust: PropTypes.func.isRequired,
     done: PropTypes.func.isRequired,

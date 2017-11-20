@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import Scoreboard from '@/components/Scoreboard'
-import * as matchActions from '@/ducks/match'
+import Scoreboard from '../components/Scoreboard'
+import * as matchActions from '../ducks/match'
 
 const mapStateToProps = (state) => ({
     players: state.match.settings.players,

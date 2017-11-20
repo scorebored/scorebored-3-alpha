@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 
-import PlayerDisplay from '@/components/PlayerDisplay'
+import PlayerDisplay from './PlayerDisplay'
 
 export default class Scoreboard extends React.Component {
 
