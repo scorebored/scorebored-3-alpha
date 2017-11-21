@@ -30,6 +30,8 @@ export const firstServer = createAction('scorebored/match/FIRST_SERVER')
 export const awardPoint = createAction('scorebored/mattch/AWARD_POINT')
 export const undo = createAction('scorebored/match/UNDO')
 export const redo = createAction('scorebored/match/REDO')
+export const nextGame = createAction('scorebored/match/NEXT_GAME')
+export const reset = createAction('scorebored/match/RESET')
 
 export default handleActions({
     [adjust]: (state, action) => {
@@ -103,7 +105,46 @@ export default handleActions({
             game: next,
             redo: state.redo.slice(0, state.redo.length - 1),
         }
-    }
+    },
+    [nextGame]: (state) => {
+        if (!isGameOver(state)) {
+            return state
+        }
+        if (isMatchOver(state)) {
+            return state
+        }
+        const newState = undoable(state)
+        newState.game = {
+            ...state.game,
+            points: [0, 0]
+        }
+        switchSides(newState)
+        // Since the first server and sides both switch each time, the
+        // starting server is always on the same side
+        newState.game.server = newState.game.firstServer
+        return newState
+    },
+    [reset]: (state) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            players: [{
+                name: 'Home Team',
+                sayAs: null,
+            }, {
+                name: 'Away Team',
+                sayAs: null,
+            }],
+        },
+        game: {
+            points: [0, 0],
+            wins: [0, 0],
+            server: null,
+            firstServer: null,
+        },
+        undo: [],
+        redo: [],
+    })
 }, defaultState)
 
 export const isGameOver = (match) => {
@@ -153,6 +194,13 @@ export const isServiceChange = (match) => {
 
 const switchServers = (match) => {
     match.game.server = otherPlayer(match.game.server)
+}
+
+const switchSides = (match) => {
+    const p0 = match.settings.players[0]
+    match.settings.players[0] = match.settings.players[1]
+    match.settings.players[1] = p0
+    return match
 }
 
 const undoable = (state) => {

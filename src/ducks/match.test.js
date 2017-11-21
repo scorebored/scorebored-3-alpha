@@ -231,3 +231,59 @@ describe('redo', () => {
         expect(state().game.points).toEqual([3, 1])
     })
 })
+
+describe('nextGame', () => {
+    test('should do nothing when the game is not over', () => {
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({points: [7, 10]}))
+        dispatch(match.nextGame())
+        expect(state().game.points).toEqual([7, 10])
+    })
+    test('should do nothing when the match is over', () => {
+        dispatch(match.settings({length: 3}))
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({wins: [1, 1], points: [7, 10]}))
+        dispatch(match.awardPoint(1))
+        dispatch(match.nextGame())
+        expect(state().game.points).toEqual([7, 11])
+    })
+    test('should advance to the next game', () => {
+        dispatch(match.settings({
+            length: 3,
+            players: [
+                {name: 'Home Team'},
+                {name: 'Away Team'},
+            ]
+        }))
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({points: [7, 10], server: 1}))
+        dispatch(match.awardPoint(1))
+        dispatch(match.nextGame())
+        expect(state().game.points).toEqual([0, 0])
+        expect(state().settings.players).toEqual(
+            [{name: 'Away Team'}, {name: 'Home Team'}]
+        )
+        expect(state().game.server).toBe(0)
+    })
+})
+
+describe('reset', () => {
+    test('should reset game state and players', () => {
+        dispatch(match.settings({
+            length: 3,
+            players: [
+                {name: 'Alpha Team'},
+                {name: 'Bravo Team'},
+            ]
+        }))
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({points: [7, 10], wins: [1, 1], server: 1}))
+        dispatch(match.reset())
+        expect(state().game.points).toEqual([0, 0])
+        expect(state().game.wins).toEqual([0, 0])
+        expect(state().settings.players[0].name).toEqual('Home Team')
+        expect(state().settings.players[1].name).toEqual('Away Team')
+        expect(state().game.server).toBe(null)
+        expect(state().game.firstServer).toBe(null)
+    })
+})
