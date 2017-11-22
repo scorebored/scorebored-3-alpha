@@ -23,3 +23,8 @@
 .drop_down {
     margin: 0 5px;
 }
+
+@font-face {
+    font-family: 'Montserrat Medium';
+    src: url(resources/fonts/Montserrat-Medium.ttf) format("truetype");
+}

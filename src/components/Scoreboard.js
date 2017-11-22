@@ -18,6 +18,7 @@ const stylePoints = {
     justifyContent: 'center',
     alignItems: 'center',
     width: '40%',
+    fontFamily: 'Montserrat Medium',
     fontSize: '35vw',
     color: '#fff',
     border: '20px solid #aaa',
@@ -61,13 +62,25 @@ const styles = {
         justifyContent: 'space-around',
         height: '10%',
     },
-    pointsRed: {
+    pointsRedOne: {
         ...stylePoints,
         backgroundColor: red,
+        fontSize: '35vw',
     },
-    pointsBlue: {
+    pointsBlueOne: {
         ...stylePoints,
         backgroundColor: blue,
+        fontSize: '35vw',
+    },
+    pointsRedTwo: {
+        ...stylePoints,
+        backgroundColor: red,
+        fontSize: '28vw',
+    },
+    pointsBlueTwo: {
+        ...stylePoints,
+        backgroundColor: blue,
+        fontSize: '28vw',
     },
     servingRed: {
         ...styleService,
@@ -117,6 +130,12 @@ export default class Scoreboard extends React.Component {
         const styleServiceBlue = this.props.server === 1
             ? styles.servingBlue
             : styles.servingOff
+        const stylePointsRed = this.props.points[0] < 10
+            ? styles.pointsRedOne
+            : styles.pointsRedTwo
+        const stylePointsBlue = this.props.points[1] < 10
+            ? styles.pointsBlueOne
+            : styles.pointsBlueTwo
 
         const winsRed = this.renderWins(0)
         const winsBlue = this.renderWins(1)
@@ -128,10 +147,10 @@ export default class Scoreboard extends React.Component {
                     <div style={styleServiceBlue}>🏓</div>
                 </div>
                 <div style={styles.pointsContainer}>
-                    <div style={styles.pointsRed}>
+                    <div style={stylePointsRed}>
                         {this.props.points[0]}
                     </div>
-                    <div style={styles.pointsBlue}>
+                    <div style={stylePointsBlue}>
                         {this.props.points[1]}
                     </div>
                 </div>
