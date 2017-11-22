@@ -287,3 +287,14 @@ describe('reset', () => {
         expect(state().game.firstServer).toBe(null)
     })
 })
+
+describe('gamesToWin', () => {
+    test('should be 1 in a single game match', () => {
+        dispatch(match.settings({length: 1}))
+        expect(match.gamesToWin(state())).toEqual(1)
+    })
+    test('should be 4 when match length is 7', () => {
+        dispatch(match.settings({length: 7}))
+        expect(match.gamesToWin(state())).toEqual(4)
+    })
+})

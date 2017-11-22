@@ -7,9 +7,11 @@ const mapStateToProps = (state) => ({
     players: state.match.settings.players,
     points: state.match.game.points,
     server: state.match.game.server,
+    wins: state.match.game.wins,
+    matchLength: state.match.settings.length,
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
     awardPoint: (playerId) => {
         dispatch(matchActions.awardPoint(playerId))
     },
@@ -21,6 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     redo: () => {
         dispatch(matchActions.redo())
+    },
+    adjust: () => {
+        ownProps.history.push('/adjust')
     }
 })
 

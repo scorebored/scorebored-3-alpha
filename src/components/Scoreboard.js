@@ -1,8 +1,104 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
 
-import PlayerDisplay from './PlayerDisplay'
+const red = '#f00'
+const blue = '#00f'
+const off = '#444'
+
+const styleService = {
+    display: 'flex',
+    width: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '5vw',
+}
+
+const stylePoints = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '40%',
+    fontSize: '35vw',
+    color: '#fff',
+    border: '20px solid #aaa',
+    borderRadius: '15px',
+}
+
+const styleMatch = {
+    display: 'flex',
+    width: '40%',
+    alignItems: 'center',
+    fontSize: '5vw',
+}
+
+const styles = {
+    main: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexFlow: 'column',
+        justifyContent: 'space-around',
+        backgroundColor: '#222',
+    },
+    serviceContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        height: '10%',
+    },
+    pointsContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        height: '75%',
+    },
+    matchContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        height: '10%',
+    },
+    pointsRed: {
+        ...stylePoints,
+        backgroundColor: red,
+    },
+    pointsBlue: {
+        ...stylePoints,
+        backgroundColor: blue,
+    },
+    servingRed: {
+        ...styleService,
+        color: red,
+    },
+    servingBlue: {
+        ...styleService,
+        color: blue,
+    },
+    servingOff: {
+        ...styleService,
+        color: off,
+    },
+    matchRed: {
+        ...styleMatch,
+        justifyContent: 'start',
+    },
+    matchBlue: {
+        ...styleMatch,
+        justifyContent: 'flex-end',
+    },
+    winRed: {
+        color: red,
+    },
+    winBlue: {
+        color: blue,
+    },
+    winOff: {
+        color: off,
+    }
+}
 
 export default class Scoreboard extends React.Component {
 
@@ -15,25 +111,63 @@ export default class Scoreboard extends React.Component {
     }
 
     render = () => {
+        const styleServiceRed = this.props.server === 0
+            ? styles.servingRed
+            : styles.servingOff
+        const styleServiceBlue = this.props.server === 1
+            ? styles.servingBlue
+            : styles.servingOff
+
+        const winsRed = this.renderWins(0)
+        const winsBlue = this.renderWins(1)
+
         return (
-            <div className='page'>
-                <ul>
-                    <li><PlayerDisplay
-                            name={this.props.players[0].name}
-                            points={this.props.points[0]}
-                            serving={this.props.server === 0}/>
-                    </li>
-                    <li><PlayerDisplay
-                            name={this.props.players[1].name}
-                            points={this.props.points[1]}
-                            serving={this.props.server === 1}/>
-                    </li>
-                </ul>
-                <Link to='/adjust'>
-                    <button>Adjust scores</button>
-                </Link>
+            <div style={styles.main}>
+                <div style={styles.serviceContainer}>
+                    <div style={styleServiceRed}>🏓</div>
+                    <div style={styleServiceBlue}>🏓</div>
+                </div>
+                <div style={styles.pointsContainer}>
+                    <div style={styles.pointsRed}>
+                        {this.props.points[0]}
+                    </div>
+                    <div style={styles.pointsBlue}>
+                        {this.props.points[1]}
+                    </div>
+                </div>
+                <div style={styles.matchContainer}>
+                    <div style={styles.matchRed}>
+                        {winsRed}
+                    </div>
+                    <div style={styles.matchBlue}>
+                        {winsBlue}
+                    </div>
+                </div>
             </div>
         )
+    }
+
+    renderWins = (playerId) => {
+        const toWin = Math.ceil(this.props.matchLength / 2)
+        if (toWin === 1) {
+            return null
+        }
+        const colorOn = playerId === 0 ? styles.winRed : styles.winBlue
+        const components = []
+        for (let i = 1; i <= toWin; i++) {
+            let c = null
+            let key = `wins-${playerId}-${i}`
+            if (i <= this.props.wins[playerId]) {
+                c = <span key={key} style={colorOn}>★</span>
+            } else {
+                c = <span key={key} style={styles.winOff}>☆</span>
+            }
+            components.push(c)
+        }
+        if (playerId === 1) {
+            components.reverse()
+        }
+        return components
     }
 
     keyPressed = (event) => {
@@ -48,6 +182,9 @@ export default class Scoreboard extends React.Component {
         }
         if (event.key === 'Backspace' && event.ctrlKey) {
             this.props.redo()
+        }
+        if (event.key === 'Escape') {
+            this.props.adjust()
         }
     }
 
@@ -64,9 +201,12 @@ Scoreboard.propTypes = {
     players: PropTypes.array.isRequired,
     points: PropTypes.array.isRequired,
     server: PropTypes.number,
+    wins: PropTypes.arrayOf(PropTypes.number).isRequired,
+    matchLength: PropTypes.number.isRequired,
 
     awardPoint: PropTypes.func.isRequired,
     firstServer: PropTypes.func.isRequired,
+    adjust: PropTypes.func.isRequired,
     undo: PropTypes.func.isRequired,
     redo: PropTypes.func.isRequired,
 }

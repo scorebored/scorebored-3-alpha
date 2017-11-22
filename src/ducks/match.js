@@ -11,12 +11,12 @@ const defaultState = {
             name: 'Away Team',
             sayAs: null,
         }],
-        length: 1,
+        length: 7,
         gameLength: 11,
     },
     game: {
         points: [0, 0],
-        wins: [0, 0],
+        wins: [2, 2],
         server: null,
         firstServer: null,
     },
@@ -190,6 +190,10 @@ export const isServiceChange = (match) => {
         return total % 2 === 0
     }
     return true
+}
+
+export const gamesToWin = (match) => {
+    return Math.ceil(match.settings.length / 2)
 }
 
 const switchServers = (match) => {
