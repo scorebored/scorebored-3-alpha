@@ -1,4 +1,4 @@
-import {otherPlayer} from '@/util/player'
+import {otherPlayer} from './player'
 
 describe('otherPlayer', () => {
     test('otherPlayer(0) is 1', () => {

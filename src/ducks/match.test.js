@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from 'redux'
-import reducer from '@/ducks/match'
-import * as match from '@/ducks/match'
+import reducer from './match'
+import * as match from './match'
 
 let dispatch
 let state

@@ -6,10 +6,6 @@
       "react"
     ],
     "plugins": [
-      ["babel-plugin-root-import", {
-        "rootPathSuffix": "src",
-        "rootPathPrefix": "@"
-      }],
       "transform-class-properties",
       "transform-object-rest-spread",
       "transform-async-to-generator"
