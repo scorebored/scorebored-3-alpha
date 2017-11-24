@@ -23,6 +23,9 @@ class MainMenu extends React.Component {
                     <div>
                         <img src={`${__dirname}/../resources/S2_ping_pong.png`}/>
                     </div>
+                    <Link id='gamepad' to='/gamepad'>
+                        <img style={roundCorners} src={`${__dirname}/../resources/green_pong.png`}/>
+                    </Link>
                     <table style={tableStyle}>
                         <tbody>
                             <tr>

@@ -10,6 +10,7 @@ import MatchSettings from './MatchSettings'
 import Scoreboard from '../containers/Scoreboard'
 import Announcer from '../containers/Announcer'
 import Subtitles from '../containers/Subtitles'
+import GamePad from './GamePad'
 
 class Root extends React.Component {
     render = () => {
@@ -23,6 +24,7 @@ class Root extends React.Component {
                             <Route exact path='/excuses' component={Excuses} />
                             <Route exact path='/scoreboard' component={Scoreboard} />
                             <Route exact path='/start' component={MatchSettings} />
+                            <Route exact path='/gamepad' component={GamePad} />
                         </Switch>
                         <Announcer/>
                         <Subtitles/>
