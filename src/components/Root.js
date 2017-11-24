@@ -9,6 +9,7 @@ import MainMenu from './MainMenu'
 import MatchSettings from './MatchSettings'
 import Scoreboard from '../containers/Scoreboard'
 import Announcer from '../containers/Announcer'
+import Subtitles from '../containers/Subtitles'
 
 class Root extends React.Component {
     render = () => {
@@ -24,6 +25,7 @@ class Root extends React.Component {
                             <Route exact path='/start' component={MatchSettings} />
                         </Switch>
                         <Announcer/>
+                        <Subtitles/>
                     </div>
                 </Router>
             </Provider>

@@ -1,9 +1,19 @@
 import {connect} from 'react-redux'
 
 import Announcer from '../components/Announcer'
+import * as announcerActions from '../ducks/announcer'
 
 const mapStateToProps = (state) => ({
     match: state.match,
 })
 
-export default connect(mapStateToProps)(Announcer)
+const mapDispatchToProps = (dispatch) => ({
+    say: (text) => {
+        dispatch(announcerActions.say(text))
+    },
+    silence: () => {
+        dispatch(announcerActions.silence())
+    },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Announcer)

@@ -1,22 +1,20 @@
-export default class WebApiTalker {
+import Talker from './talker'
+
+export default class WebApiTalker extends Talker {
 
     constructor() {
+        super()
         this.synth = window.speechSynthesis
     }
 
-    say = (phrases) => {
-        let text = ''
-        if (Array.isArray(phrases)) {
-            text = phrases.join('. ')
-        } else {
-            text = phrases
-        }
-        this.synth.speak(new SpeechSynthesisUtterance(text))
+    utter = (phrase) => {
+        const utter = new SpeechSynthesisUtterance(phrase)
+        const promise = new Promise(
+            (resolve, reject) => {
+                utter.onend(resolve)
+                utter.onerror(reject)
+            }
+        )
+        return {talking: this.synth, promise}
     }
-
-    silence = () => {
-        this.synth.cancel()
-    }
-
-    toString = () => 'Standard'
 }
