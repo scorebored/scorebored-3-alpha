@@ -28,3 +28,8 @@
     font-family: 'Montserrat Medium';
     src: url(resources/fonts/Montserrat-Medium.ttf) format("truetype");
 }
+
+@font-face {
+    font-family: 'Carrois Gothic Regular';
+    src: url(resources/fonts/CarroisGothic-Regular.ttf) format("truetype");
+}

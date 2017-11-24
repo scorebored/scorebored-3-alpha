@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {otherPlayer} from '../lib/player'
+import {otherPlayer} from '../util/player'
 import AdjustPlayer from './AdjustPlayer'
 
 class AdjustGame extends React.Component {

@@ -1,16 +1,9 @@
 import {createAction, handleActions} from 'redux-actions'
 import deepEqual from 'deep-equal'
-import {otherPlayer} from '../lib/player'
+import {otherPlayer} from '../util/player'
 
 const defaultState = {
     settings: {
-        players: [{
-            name: 'Home Team',
-            sayAs: null,
-        }, {
-            name: 'Away Team',
-            sayAs: null,
-        }],
         length: 1,
         gameLength: 11,
     },
@@ -20,6 +13,7 @@ const defaultState = {
         server: null,
         firstServer: null,
     },
+    announce: null,
     undo: [],
     redo: [],
 }
@@ -27,7 +21,7 @@ const defaultState = {
 export const adjust = createAction('scorebored/match/ADJUST')
 export const settings = createAction('scorebored/match/SETTINGS')
 export const firstServer = createAction('scorebored/match/FIRST_SERVER')
-export const awardPoint = createAction('scorebored/mattch/AWARD_POINT')
+export const awardPoint = createAction('scorebored/match/AWARD_POINT')
 export const undo = createAction('scorebored/match/UNDO')
 export const redo = createAction('scorebored/match/REDO')
 export const nextGame = createAction('scorebored/match/NEXT_GAME')
@@ -42,6 +36,7 @@ export default handleActions({
         newState.game = {
             ...state.game,
             ...action.payload,
+            announce: null,
         }
         return newState
     },
@@ -50,6 +45,7 @@ export default handleActions({
         settings: {
             ...state.settings,
             ...action.payload,
+            announce: null,
         },
     }),
     [awardPoint]: (state, action) => {
@@ -57,6 +53,7 @@ export default handleActions({
             return state
         }
         const newState = undoable(state)
+        newState.announce = 'point'
         newState.game = {
             ...state.game,
             points: state.game.points.slice(),
@@ -93,6 +90,7 @@ export default handleActions({
             game: previous,
             undo: state.undo.slice(0, state.undo.length - 1),
             redo: state.redo.concat(state.game),
+            announce: null,
         }
     },
     [redo]: (state) => {
@@ -104,6 +102,7 @@ export default handleActions({
             ...state,
             game: next,
             redo: state.redo.slice(0, state.redo.length - 1),
+            announce: null,
         }
     },
     [nextGame]: (state) => {
@@ -116,7 +115,8 @@ export default handleActions({
         const newState = undoable(state)
         newState.game = {
             ...state.game,
-            points: [0, 0]
+            points: [0, 0],
+            announce: 'nextGame',
         }
         switchSides(newState)
         // Since the first server and sides both switch each time, the
@@ -128,13 +128,6 @@ export default handleActions({
         ...state,
         settings: {
             ...state.settings,
-            players: [{
-                name: 'Home Team',
-                sayAs: null,
-            }, {
-                name: 'Away Team',
-                sayAs: null,
-            }],
         },
         game: {
             points: [0, 0],
@@ -144,6 +137,7 @@ export default handleActions({
         },
         undo: [],
         redo: [],
+        announce: null,
     })
 }, defaultState)
 
@@ -201,9 +195,9 @@ const switchServers = (match) => {
 }
 
 const switchSides = (match) => {
-    const p0 = match.settings.players[0]
-    match.settings.players[0] = match.settings.players[1]
-    match.settings.players[1] = p0
+    match.game.points = [match.game.points[1], match.game.points[0]]
+    match.game.wins = [match.game.wins[1], match.game.wins[0]]
+    match.game.server = otherPlayer(match.game.server)
     return match
 }
 
