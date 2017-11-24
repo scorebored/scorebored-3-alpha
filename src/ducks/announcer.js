@@ -6,6 +6,7 @@ const defaultSubtitles = (process.platform !== 'darwin')
 const defaultState = {
     speaking: null,
     talker: defaultTalker,
+    script: 'standard',
     subtitles: defaultSubtitles,
 }
 

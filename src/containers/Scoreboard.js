@@ -4,7 +4,6 @@ import Scoreboard from '../components/Scoreboard'
 import * as matchActions from '../ducks/match'
 
 const mapStateToProps = (state) => ({
-    players: state.match.settings.players,
     points: state.match.game.points,
     server: state.match.game.server,
     wins: state.match.game.wins,
