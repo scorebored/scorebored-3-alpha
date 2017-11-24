@@ -70,6 +70,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: '5vw',
+        fontFamily: 'Symbola',
     },
     pointsRedOne: {
         ...stylePoints,
@@ -222,7 +223,6 @@ export default class Scoreboard extends React.Component {
 }
 
 Scoreboard.propTypes = {
-    players: PropTypes.array.isRequired,
     points: PropTypes.array.isRequired,
     server: PropTypes.number,
     wins: PropTypes.arrayOf(PropTypes.number).isRequired,
