@@ -5,6 +5,7 @@ import * as announcerActions from '../ducks/announcer'
 
 const mapStateToProps = (state) => ({
     match: state.match,
+    talkerName: state.announcer.talker,
 })
 
 const mapDispatchToProps = (dispatch) => ({

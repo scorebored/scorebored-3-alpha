@@ -11,10 +11,11 @@ export default class WebApiTalker extends Talker {
         const utter = new SpeechSynthesisUtterance(phrase)
         const promise = new Promise(
             (resolve, reject) => {
-                utter.onend(resolve)
-                utter.onerror(reject)
+                utter.onend = resolve
+                utter.onerror = reject
             }
         )
+        this.synth.speak(utter)
         return {talking: this.synth, promise}
     }
 }

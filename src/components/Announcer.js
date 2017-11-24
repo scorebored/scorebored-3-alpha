@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Talker from '../talkers/mute'
+import talkers from '../talkers'
 import Script from '../scripts/standard'
 
 export default class Announcer extends React.Component {
@@ -13,7 +13,7 @@ export default class Announcer extends React.Component {
     }
 
     assignTalker = () => {
-        this.talker = new Talker()
+        this.talker = talkers[this.props.talkerName]
         this.talker.events.on('say', (text) => this.props.say(text))
         this.talker.events.on('silence', this.props.silence)
     }
@@ -31,6 +31,7 @@ export default class Announcer extends React.Component {
 
 Announcer.propTypes = {
     match: PropTypes.object.isRequired,
+    talkerName: PropTypes.string.isRequired,
 
     say: PropTypes.func.isRequired,
     silence: PropTypes.func.isRequired,
