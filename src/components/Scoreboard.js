@@ -70,6 +70,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: '5vw',
+        fontFamily: 'Symbola',
     },
     pointsRedOne: {
         ...stylePoints,

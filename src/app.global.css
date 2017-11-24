@@ -33,3 +33,9 @@
     font-family: 'Carrois Gothic Regular';
     src: url(resources/fonts/CarroisGothic-Regular.ttf) format("truetype");
 }
+
+@font-face {
+    font-family: "Symbola";
+    src: url(resources/fonts/Symbola.ttf) format("truetype");
+}
+
