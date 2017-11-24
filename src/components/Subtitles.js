@@ -28,7 +28,7 @@ const styles = {
 export default class Subtitles extends React.Component {
 
     render = () => {
-        if (!this.props.text) {
+        if (!this.props.active || !this.props.text) {
             return null
         }
         return (
@@ -42,5 +42,6 @@ export default class Subtitles extends React.Component {
 }
 
 Subtitles.propTypes = {
+    active: PropTypes.bool.isRequired,
     text: PropTypes.string,
 }
