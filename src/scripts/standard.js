@@ -44,7 +44,7 @@ export default class StandardScript {
     }
 
     playerName = (playerId) => {
-        const player = this.now.settings.players[playerId]
-        return player.sayAs || player.name
+        return playerId === 0 ? 'Red': 'Blue'
     }
+
 }

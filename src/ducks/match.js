@@ -4,13 +4,6 @@ import {otherPlayer} from '../util/player'
 
 const defaultState = {
     settings: {
-        players: [{
-            name: 'Home Team',
-            sayAs: null,
-        }, {
-            name: 'Away Team',
-            sayAs: null,
-        }],
         length: 1,
         gameLength: 11,
     },
@@ -135,13 +128,6 @@ export default handleActions({
         ...state,
         settings: {
             ...state.settings,
-            players: [{
-                name: 'Home Team',
-                sayAs: null,
-            }, {
-                name: 'Away Team',
-                sayAs: null,
-            }],
         },
         game: {
             points: [0, 0],
@@ -209,9 +195,9 @@ const switchServers = (match) => {
 }
 
 const switchSides = (match) => {
-    const p0 = match.settings.players[0]
-    match.settings.players[0] = match.settings.players[1]
-    match.settings.players[1] = p0
+    match.game.points = [match.game.points[1], match.game.points[0]]
+    match.game.wins = [match.game.wins[1], match.game.wins[0]]
+    match.game.server = otherPlayer(match.game.server)
     return match
 }
 
