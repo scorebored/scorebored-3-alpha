@@ -8,19 +8,23 @@ import Excuses from './Excuses'
 import MainMenu from './MainMenu'
 import MatchSettings from './MatchSettings'
 import Scoreboard from '../containers/Scoreboard'
+import Announcer from '../containers/Announcer'
 
 class Root extends React.Component {
     render = () => {
         return (
             <Provider store={store}>
                 <Router>
-                    <Switch>
-                        <Route exact path='/' component={MainMenu} />
-                        <Route exact path='/adjust' component={AdjustGame} />
-                        <Route exact path='/excuses' component={Excuses} />
-                        <Route exact path='/scoreboard' component={Scoreboard} />
-                        <Route exact path='/start' component={MatchSettings} />
-                    </Switch>
+                    <div>
+                        <Switch>
+                            <Route exact path='/' component={MainMenu} />
+                            <Route exact path='/adjust' component={AdjustGame} />
+                            <Route exact path='/excuses' component={Excuses} />
+                            <Route exact path='/scoreboard' component={Scoreboard} />
+                            <Route exact path='/start' component={MatchSettings} />
+                        </Switch>
+                        <Announcer/>
+                    </div>
                 </Router>
             </Provider>
         )
