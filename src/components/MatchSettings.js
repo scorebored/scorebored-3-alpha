@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { /*Navbar, Jumbotron,*/ Button, DropdownButton, MenuItem } from 'react-bootstrap'
+import { Button, DropdownButton, MenuItem } from 'react-bootstrap'
 
 class MatchSettings extends React.Component {
     render = () => {
