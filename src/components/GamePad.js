@@ -40,15 +40,15 @@ export default class GamePad extends React.Component {
                   let button = gp.buttons[i]
                   button['timestamp'] = Date.now()
                   if(this.state.pressedButton !== null) {
-                      let pressedButton = this.state.pressedButton
-                      if(button.timestamp > pressedButton.timestamp + 10) {
+                      let lastPressed = this.state.pressedButton
+                      if(Date.now() > lastPressed + 100) {
                           console.log('Button Pressed')
                           console.log(i)
                           console.log(gp.buttons[i])
-                          this.setState({'pressedButton': button})
+                          this.setState({'pressedButton': Date.now()})
                       }
                   } else {
-                      this.setState({'pressedButton': button})
+                      this.setState({'pressedButton': Date.now()})
                       console.log('Button Pressed')
                       console.log(i)
                       console.log(gp.buttons[i])
