@@ -5,7 +5,7 @@ export default class Talker {
 
     constructor() {
         this.queue = []
-        this.talking = null
+        this.talking = false
         this.events = new EventEmitter()
     }
 
@@ -21,27 +21,27 @@ export default class Talker {
 
     cancel = () => {
         if (this.talking) {
-            this.talking.cancel()
+            this.silence()
         }
         this.queue = []
-        this.talking = null
+        this.talking = false
         this.events.emit('silence')
     }
 
     processQueue = () => {
         if (this.queue.length === 0) {
-            this.talking = null
+            this.talking = false
             this.events.emit('silence')
             return
         }
         const phrase = this.queue.shift()
-        const {talking, promise} = this.utter(phrase)
+        this.talking = true
+        this.utter(phrase)
         this.events.emit('say', phrase)
-        this.talking = talking
-        promise.then(this.processQueue).catch(this.error)
     }
 
     error = (reason) => {
+        this.talking = false
         log.error('unable to speak:', reason)
     }
 }

@@ -1,6 +1,6 @@
 import Talker from './talker'
 
-const duration = 2000 // ms
+export const delay = 1500 // ms
 
 export default class Mute extends Talker {
 
@@ -10,15 +10,11 @@ export default class Mute extends Talker {
     }
 
     utter = () => {
-        const promise = new Promise(
-            (resolve) => {
-                clearTimeout(this.timer)
-                this.timer = setTimeout(resolve, duration)
-            }
-        )
-        const talking = {
-            cancel: () => clearTimeout(this.timer)
-        }
-        return {talking, promise}
+        this.silence()
+        this.timer = setTimeout(this.processQueue, delay)
+    }
+
+    silence = () => {
+        clearTimeout(this.timer)
     }
 }
