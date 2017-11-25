@@ -19,7 +19,11 @@ export default class GamePad extends React.Component {
                 11: 'Start'
             }
         }
-        return mappings[id]
+        if(id in mappings) {
+            return mappings[id]
+        } else {
+            return null
+        }
     }
 
     componentDidMount = () => {
@@ -61,12 +65,20 @@ export default class GamePad extends React.Component {
                   if(this.state.pressedButton !== null) {
                       let lastPressed = this.state.pressedButton
                       if(Date.now() > lastPressed + 100) {
-                          console.log(mapping[i] + ' Button Pressed')
+                          if (mapping) {
+                              console.log(mapping[i] + ' Button Pressed')
+                          } else {
+                              console.log(i + ' Button Pressed')
+                          }
                           this.setState({'pressedButton': Date.now()})
                       }
                   } else {
+                      if (mapping) {
+                          console.log(mapping[i] + ' Button Pressed')
+                      } else {
+                          console.log(i + ' Button Pressed')
+                      }
                       this.setState({'pressedButton': Date.now()})
-                      console.log(mapping[i] + ' Button Pressed')
                   }
               }
           }
