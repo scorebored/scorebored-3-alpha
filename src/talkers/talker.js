@@ -1,4 +1,5 @@
 import {EventEmitter} from 'events'
+import log from 'loglevel'
 
 export default class Talker {
 
@@ -41,6 +42,6 @@ export default class Talker {
     }
 
     error = (reason) => {
-        console.error('unable to speak:', reason)
+        log.error('unable to speak:', reason)
     }
 }

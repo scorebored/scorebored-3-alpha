@@ -12,9 +12,6 @@
     },
     "rules": {
       "semi": [2, "never"],
-      "quotes": [2, "single"],
-      "no-console": [2, {
-        "allow": ["warn", "error"]
-      }]
+      "quotes": [2, "single"]
     }
   }
