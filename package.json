@@ -5,11 +5,12 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
-    "test": "jest && yarn lint",
+    "jest": "jest",
     "package": "electron-forge package && (cd out ; tar cf scorebored-linux-x64.tar.gz scorebored-linux-x64)",
     "package-pi": "electron-forge --arch=armv7l package && (cd out ; tar cf scorebored-linux-armv7l.tar.gz scorebored-linux-armv7l)",
     "make": "electron-forge make",
     "lint": "eslint --cache --color --ext .js src",
+    "test": "yarn test && yarn lint",
     "clean": "rm -rf out"
   },
   "devDependencies": {

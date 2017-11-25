@@ -9,6 +9,10 @@ export default class StandardScript {
         ]
     }
 
+    sayServesFirst = (playerId) => {
+        this.say(`${this.playerName(playerId)} serves first`)
+    }
+
     sayPoint = (playerId) => {
         this.say(`Point ${this.playerName(playerId)}`)
     }
@@ -33,6 +37,9 @@ export default class StandardScript {
         const type = now.announce
         if (type === 'point') {
             this.awardPoint()
+        }
+        if (type === 'firstServer') {
+            this.sayServesFirst(this.now.game.firstServer)
         }
         return this.phrases
     }

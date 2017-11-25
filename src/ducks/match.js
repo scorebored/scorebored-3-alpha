@@ -73,6 +73,7 @@ export default handleActions({
             return
         }
         const newState = undoable(state)
+        newState.announce = 'firstServer'
         newState.game = {
             ...state.game,
             server: action.payload,
