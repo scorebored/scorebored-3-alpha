@@ -5,8 +5,8 @@ export default class StandardScript {
     sample = () => {
         return [
             'Point Blue',
-            '3 to 2',
-            'Switch sides'
+            '4 to 6',
+            'Switch servers'
         ]
     }
 
