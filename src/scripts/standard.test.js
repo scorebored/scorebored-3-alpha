@@ -1,4 +1,5 @@
 import StandardScript from './standard'
+import {createState as state} from '../ducks/match'
 
 let script
 
@@ -240,7 +241,6 @@ test('win game in match, match tied at 1', () => {
     ])
 })
 
-
 test('win game in match, match tied at 2', () => {
     const was = state({
         game: {points: [10, 7], wins: [1, 2]}
@@ -258,31 +258,3 @@ test('win game in match, match tied at 2', () => {
     ])
 })
 
-const state = (override) => {
-    override = override || {}
-    const s = {
-        settings: {
-            length: 1,
-            gameLength: 11,
-        },
-        game: {
-            points: [0, 0],
-            wins: [0, 0],
-            server: null,
-            firstServer: null,
-        },
-        announce: null,
-        undo: [],
-        redo: []
-    }
-    if (override.announce) {
-        s.announce = override.announce
-    }
-    if (override.settings) {
-        s.settings = {...s.settings, ...override.settings}
-    }
-    if (override.game) {
-        s.game = {...s.game, ...override.game}
-    }
-    return s
-}

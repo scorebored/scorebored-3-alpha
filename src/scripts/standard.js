@@ -54,11 +54,11 @@ export default class StandardScript {
         this.say('Deuce')
     }
 
-    sayWinsGame = (playerId) => {
+    sayWinsGame(playerId) {
         this.say(`${this.playerName(playerId)} wins the game`)
     }
 
-    sayWinsMatch = (playerId) => {
+    sayWinsMatch(playerId) {
         this.say(`${this.playerName(playerId)} wins the match`)
     }
 

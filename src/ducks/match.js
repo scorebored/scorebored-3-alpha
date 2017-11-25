@@ -189,11 +189,11 @@ export const isGameOver = (match) => {
 }
 
 export const isMatchOver = (match) => {
-    const total = match.game.wins[0] + match.game.wins[1]
-    if (total < match.settings.length) {
-        return false
+    const toWin = gamesToWin(match)
+    if (match.game.wins[0] >= toWin || match.game.wins[1] >= toWin) {
+        return true
     }
-    return true
+    return false
 }
 
 export const isOvertime = (match) => {
@@ -247,4 +247,33 @@ const undoable = (state) => {
     }
     newState.undo.push(state.game)
     return newState
+}
+
+export const createState = (override) => {
+    override = override || {}
+    const s = {
+        settings: {
+            length: 1,
+            gameLength: 11,
+        },
+        game: {
+            points: [0, 0],
+            wins: [0, 0],
+            server: null,
+            firstServer: null,
+        },
+        announce: null,
+        undo: [],
+        redo: []
+    }
+    if (override.announce) {
+        s.announce = override.announce
+    }
+    if (override.settings) {
+        s.settings = {...s.settings, ...override.settings}
+    }
+    if (override.game) {
+        s.game = {...s.game, ...override.game}
+    }
+    return s
 }
