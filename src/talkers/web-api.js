@@ -1,6 +1,6 @@
 import Talker from './talker'
 
-const phraseDelay = 250 // ms
+export const phraseDelay = 250 // ms
 
 export default class WebApiTalker extends Talker {
 
@@ -8,40 +8,37 @@ export default class WebApiTalker extends Talker {
         super()
         this.synth = window.speechSynthesis
         this.timer = null
+        this.utterance = null
     }
 
     utter = (phrase) => {
-        const utter = new SpeechSynthesisUtterance(phrase)
-        const promise = new Promise(
-            (resolve, reject) => {
-                utter.onend = () => this.wait(resolve, utter)
-                utter.onerror = reject
-            }
-        )
-        this.synth.speak(utter)
-        return {
-            talking: {
-                cancel: () => {
-                    clearTimeout(this.timer)
-                    utter.canceled = true
-                    this.synth.cancel()
-                }
-            },
-            promise
+        this.silence()
+        const utterance = new SpeechSynthesisUtterance(phrase)
+        utterance.onend = () => this.wait(utterance)
+        utterance.onerror = this.error
+        this.synth.speak(utterance)
+        this.utterance = utterance
+    }
+
+    silence = () => {
+        clearTimeout(this.timer)
+        if (this.utterance) {
+            this.utterance.canceled = true
         }
+        this.synth.cancel()
     }
 
     // Instead of resolving right away, put in a slight delay. This makes
     // the speech sound more natural when there are back-to-back phrases.
     // Otherwise, the speech sounds too rushed
-    wait = (resolve, utter) => {
+    wait = (utterance) => {
         // If this phrase is canceled, do not resolve the promise as the
         // application is no longer interested.
-        if (utter.canceled) {
+        if (utterance.canceled) {
             return
         }
         clearTimeout(this.timer)
-        this.timer = setTimeout(resolve, phraseDelay)
+        this.timer = setTimeout(this.processQueue, phraseDelay)
     }
 
 }
