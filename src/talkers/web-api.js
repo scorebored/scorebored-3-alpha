@@ -1,5 +1,7 @@
 import Talker from './talker'
 
+const phraseDelay = 300 // ms
+
 export default class WebApiTalker extends Talker {
 
     constructor() {
@@ -11,7 +13,7 @@ export default class WebApiTalker extends Talker {
         const utter = new SpeechSynthesisUtterance(phrase)
         const promise = new Promise(
             (resolve, reject) => {
-                utter.onend = resolve
+                utter.onend = () => setTimeout(resolve, phraseDelay)
                 utter.onerror = reject
             }
         )

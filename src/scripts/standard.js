@@ -1,3 +1,4 @@
+import {isOvertime, isServiceChange} from '../ducks/match'
 
 export default class StandardScript {
 
@@ -11,6 +12,10 @@ export default class StandardScript {
 
     sayServesFirst = (playerId) => {
         this.say(`${this.playerName(playerId)} serves first`)
+    }
+
+    sayIsServing = () => {
+        this.say('Switch servers')
     }
 
     sayPoint = (playerId) => {
@@ -56,7 +61,11 @@ export default class StandardScript {
         } else {
             this.sayPointsToPoints(pnow[0], pnow[1])
         }
+        if (isServiceChange(this.now) && !isOvertime(this.now)) {
+            this.sayIsServing()
+        }
     }
+
 
     playerName = (playerId) => {
         return playerId === 0 ? 'Red': 'Blue'
