@@ -1,8 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-
 export default class GamePad extends React.Component {
+    gamePadMappings = (id) => {
+        let mappings = {
+            'Gamesir-G4s 1.16 (Vendor: 05ac Product: 044d)' : {
+                0: 'A',
+                1:'B',
+                3: 'X',
+                4: 'Y',
+                6: 'LB',
+                7: 'RB',
+                8: 'LT',
+                9: 'RT',
+                13: 'LD',
+                14: 'RD',
+                10: 'Select',
+                11: 'Start'
+            }
+        }
+        if(id in mappings) {
+            return mappings[id]
+        } else {
+            return null
+        }
+    }
 
     componentDidMount = () => {
         this.setState({'pressedButton': null})
@@ -32,6 +54,7 @@ export default class GamePad extends React.Component {
 
       var gp = gamepads[0];
       if(gp){
+          let mapping = this.gamePadMappings(gp.id)
           let pressed = true
           for (let i = 0; i < gp.buttons.length; i++) {
               let val = gp.buttons[i]
@@ -40,18 +63,22 @@ export default class GamePad extends React.Component {
                   let button = gp.buttons[i]
                   button['timestamp'] = Date.now()
                   if(this.state.pressedButton !== null) {
-                      let pressedButton = this.state.pressedButton
-                      if(button.timestamp > pressedButton.timestamp + 10) {
-                          console.log('Button Pressed')
-                          console.log(i)
-                          console.log(gp.buttons[i])
-                          this.setState({'pressedButton': button})
+                      let lastPressed = this.state.pressedButton
+                      if(Date.now() > lastPressed + 100) {
+                          if (mapping) {
+                              console.log(mapping[i] + ' Button Pressed')
+                          } else {
+                              console.log(i + ' Button Pressed')
+                          }
+                          this.setState({'pressedButton': Date.now()})
                       }
                   } else {
-                      this.setState({'pressedButton': button})
-                      console.log('Button Pressed')
-                      console.log(i)
-                      console.log(gp.buttons[i])
+                      if (mapping) {
+                          console.log(mapping[i] + ' Button Pressed')
+                      } else {
+                          console.log(i + ' Button Pressed')
+                      }
+                      this.setState({'pressedButton': Date.now()})
                   }
               }
           }
