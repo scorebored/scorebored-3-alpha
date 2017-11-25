@@ -1,6 +1,14 @@
 
 export default class StandardScript {
 
+    sample = () => {
+        return [
+            'Point Blue',
+            '3 to 2',
+            'Switch sides'
+        ]
+    }
+
     sayPoint = (playerId) => {
         this.say(`Point ${this.playerName(playerId)}`)
     }

@@ -59,6 +59,9 @@ class MainMenu extends React.Component {
                         </tbody>
                     </table>
                 </div>
+                <Link to='/settings'>
+                    <button>Settings</button>
+                </Link>
                 {/*
                 <Button bsSize='large' bsStyle='link'>
                     <Link to='/excuses'>Excuses
