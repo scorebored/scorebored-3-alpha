@@ -10,14 +10,14 @@ class AdjustGame extends React.Component {
         this.setState({
             0: {
                 id: 0,
-                name: this.props.players[0].name,
+                name: 'Red',
                 points: this.props.points[0],
                 server: this.props.server === 0,
                 error: false,
             },
             1: {
                 id: 1,
-                name: this.props.players[1].name,
+                name: 'Blue',
                 points: this.props.points[1],
                 server: this.props.server === 1,
                 error: false,
@@ -109,7 +109,6 @@ class AdjustGame extends React.Component {
 export default AdjustGame
 
 AdjustGame.propTypes = {
-    players: PropTypes.array.isRequired,
     points: PropTypes.array.isRequired,
     server: PropTypes.number,
     gameLength: PropTypes.number.isRequired,
