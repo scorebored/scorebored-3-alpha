@@ -76,6 +76,71 @@ describe('isMatchOver', () => {
     })
 })
 
+describe('isGamePoint, 11 point game', () => {
+    test('not when below 10 points', () => {
+        state = {
+            settings: {gameLength: 11, length: 1},
+            game: {points: [5, 5]}
+        }
+        expect(match.isGamePoint(state)).toBe(false)
+    })
+    test('when at 10 points', () => {
+        state = {
+            settings: {gameLength: 11, length: 1},
+            game: {points: [10, 5]}
+        }
+        expect(match.isGamePoint(state)).toBe(true)
+    })
+})
+
+describe('isGamePoint, 21 point game', () => {
+    test('not when below 20 points', () => {
+        state = {
+            settings: {gameLength: 21, length: 1},
+            game: {points: [15, 15]}
+        }
+        expect(match.isGamePoint(state)).toBe(false)
+    })
+    test('when at 20 points', () => {
+        state = {
+            settings: {gameLength: 21, length: 1},
+            game: {points: [20, 15]}
+        }
+        expect(match.isGamePoint(state)).toBe(true)
+    })
+})
+
+describe('isMatchPoint, 11 point game', () => {
+    test('not when the match is a single game', () => {
+        state = {
+            settings: {gameLength: 11, length: 1},
+            game: {points: [10, 9], wins: [0, 0]}
+        }
+        expect(match.isMatchPoint(state)).toBe(false)
+    })
+    test('must also be a game point', () => {
+        state = {
+            settings: {gameLength: 11, length: 3},
+            game: {points: [5, 9], wins: [1, 1]}
+        }
+        expect(match.isMatchPoint(state)).toBe(false)
+    })
+    test('not when the game point will not win the match', () => {
+        state = {
+            settings: {gameLength: 11, length: 3},
+            game: {points: [5, 10], wins: [1, 0]}
+        }
+        expect(match.isMatchPoint(state)).toBe(false)
+    })
+    test('when the game point will win the match', () => {
+        state = {
+            settings: {gameLength: 11, length: 3},
+            game: {points: [5, 10], wins: [0, 1]}
+        }
+        expect(match.isMatchPoint(state)).toBe(true)
+    })
+})
+
 describe('awardPoint', () => {
     test('should increment score', () => {
         dispatch(match.firstServer(1))

@@ -142,6 +142,39 @@ export default handleActions({
     })
 }, defaultState)
 
+export const isGamePoint = (match) => {
+    const p0 = match.game.points[0]
+    const p1 = match.game.points[1]
+    const len = match.settings.gameLength
+
+    if (p0 >= len - 1 || p1 >= len - 1) {
+        return true
+    }
+    return false
+}
+
+export const isMatchPoint = (match) => {
+    const p0 = match.game.points[0]
+    const p1 = match.game.points[1]
+    const glen = match.settings.gameLength
+
+    const w0 = match.game.wins[0]
+    const w1 = match.game.wins[1]
+    const mlen = match.settings.length
+    const toWin = gamesToWin(match)
+
+    if (mlen == 1) {
+        return false
+    }
+    if (p0 >= glen - 1 && w0 + 1 >= toWin) {
+        return true
+    }
+    if (p1 >= glen - 1 && w1 + 1 >= toWin) {
+        return true
+    }
+    return false
+}
+
 export const isGameOver = (match) => {
     const p0 = match.game.points[0]
     const p1 = match.game.points[1]
@@ -166,11 +199,15 @@ export const isMatchOver = (match) => {
 export const isOvertime = (match) => {
     const p0 = match.game.points[0]
     const p1 = match.game.points[1]
+    const len = match.settings.gameLength
 
     if (isGameOver(match)) {
         return false
     }
-    if (p0 >= match.settings.gameLength || p1 >= match.settings.gameLength) {
+    if (p0 === len - 1 && p1 === len - 1) {
+        return true
+    }
+    if (p0 >= len || p1 >= len) {
         return true
     }
     return false
