@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import * as controller from '../controller'
 
 const redTeamColor = '#f00'
 const blueTeamColor = '#00f'
@@ -129,11 +130,11 @@ const styles = {
 export default class Scoreboard extends React.Component {
 
     componentDidMount = () => {
-        window.addEventListener('keyup', this.keyPressed)
+        controller.addListener(this.controllerInput)
     }
 
     componentWillUnmount = () => {
-        window.removeEventListener('keyup', this.keyPressed)
+        controller.removeListener(this.controllerInput)
     }
 
     render = () => {
@@ -195,20 +196,20 @@ export default class Scoreboard extends React.Component {
         return <span style={style}>{stars.join(' ')}</span>
     }
 
-    keyPressed = (event) => {
-        if (event.key === 'ArrowLeft') {
+    controllerInput = (button) => {
+        if (button === controller.RED) {
             this.update(0)
         }
-        if (event.key === 'ArrowRight') {
+        if (button === controller.BLUE) {
             this.update(1)
         }
-        if (event.key === 'Backspace' && !event.ctrlKey) {
+        if (button === controller.UNDO) {
             this.props.undo()
         }
-        if (event.key === 'Backspace' && event.ctrlKey) {
+        if (button === controller.REDO) {
             this.props.redo()
         }
-        if (event.key === 'Escape') {
+        if (button === controller.BACK) {
             this.props.adjust()
         }
     }

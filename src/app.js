@@ -2,6 +2,8 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import debug from './debug'
 
+import keyboardInit from './controller/keyboard'
+
 if (module.hot) {
     const render = () => {
         const Root = require('./components/Root').default
@@ -17,3 +19,5 @@ if (module.hot) {
 }
 
 debug()
+keyboardInit()
+
