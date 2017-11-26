@@ -22,7 +22,7 @@ export default class StandardScript {
         this.say(`${this.playerName(playerId)} serves first`)
     }
 
-    sayIsServing() {
+    saySwitchServers() {
         this.say('Switch servers')
     }
 
@@ -124,7 +124,7 @@ export default class StandardScript {
             this.sayPointsToPoints(pnow[0], pnow[1])
         }
         if (isServiceChange(this.now)) {
-            this.sayIsServing()
+            this.saySwitchServers()
         }
         if (isMatchPoint(this.now)) {
             this.sayMatchPoint()

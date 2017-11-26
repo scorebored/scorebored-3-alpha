@@ -9,6 +9,7 @@ const defaultState = {
     },
     game: {
         points: [0, 0],
+        streak: [0, 0],
         wins: [0, 0],
         server: null,
         firstServer: null,
@@ -36,8 +37,9 @@ export default handleActions({
         newState.game = {
             ...state.game,
             ...action.payload,
-            announce: null,
+            streak: [0, 0],
         }
+        newState.announce = null
         return newState
     },
     [settings]: (state, action) => ({
@@ -45,10 +47,12 @@ export default handleActions({
         settings: {
             ...state.settings,
             ...action.payload,
-            announce: null,
         },
+        announce: null,
     }),
     [awardPoint]: (state, action) => {
+        const awardTo = action.payload
+        const other = otherPlayer(awardTo)
         if (isGameOver(state)) {
             return state
         }
@@ -57,8 +61,11 @@ export default handleActions({
         newState.game = {
             ...state.game,
             points: state.game.points.slice(),
+            streak: state.game.points.slice(),
         }
-        newState.game.points[action.payload] += 1
+        newState.game.points[awardTo] += 1
+        newState.game.streak[awardTo] += 1
+        newState.game.streak[other] = 0
         if (!isGameOver(newState) && isServiceChange(newState)) {
             switchServers(newState)
         }
@@ -114,10 +121,11 @@ export default handleActions({
             return state
         }
         const newState = undoable(state)
+        state.announce = 'nextGame'
         newState.game = {
             ...state.game,
             points: [0, 0],
-            announce: 'nextGame',
+            streak: [0, 0],
         }
         switchSides(newState)
         // Since the first server and sides both switch each time, the
@@ -132,6 +140,7 @@ export default handleActions({
         },
         game: {
             points: [0, 0],
+            streak: [0, 0],
             wins: [0, 0],
             server: null,
             firstServer: null,
@@ -258,6 +267,7 @@ export const createState = (override) => {
         },
         game: {
             points: [0, 0],
+            streak: [0, 0],
             wins: [0, 0],
             server: null,
             firstServer: null,

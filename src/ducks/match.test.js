@@ -348,3 +348,35 @@ describe('gamesToWin', () => {
         expect(match.gamesToWin(state())).toEqual(4)
     })
 })
+
+describe('streak', () => {
+    test('should advance on points', () => {
+        dispatch(match.firstServer(0))
+        dispatch(match.awardPoint(0))
+        dispatch(match.awardPoint(0))
+        expect(state().game.streak).toEqual([2, 0])
+    })
+    test('should zero out when other player scores', () => {
+        dispatch(match.firstServer(0))
+        dispatch(match.awardPoint(0))
+        dispatch(match.awardPoint(0))
+        dispatch(match.awardPoint(1))
+        expect(state().game.streak).toEqual([0, 1])
+    })
+    test('should zero all when scores adjust', () => {
+        dispatch(match.firstServer(0))
+        dispatch(match.awardPoint(0))
+        dispatch(match.awardPoint(0))
+        dispatch(match.adjust({points: [1, 0]}))
+        expect(state().game.streak).toEqual([0, 0])
+    })
+    test('should zero all for next game', () => {
+        dispatch(match.settings({length: 3}))
+        dispatch(match.firstServer(0))
+        dispatch(match.adjust({points: [9, 0]}))
+        dispatch(match.awardPoint(0))
+        dispatch(match.awardPoint(0))
+        dispatch(match.nextGame())
+        expect(state().game.streak).toEqual([0, 0])
+    })
+})

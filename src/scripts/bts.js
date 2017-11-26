@@ -26,14 +26,39 @@ export default class BtsScript extends StandardScript {
         if (p1 === 10) {
             p1 = 'Ken'
         }
-        this.say(`${p0} to ${p1}`)
+        super.sayPointsToPoints(p0, p1)
     }
 
     sayPointsAll(points) {
         if (points === 10) {
             points = 'Ken'
         }
-        this.say(`${points} all`)
+        super.sayPointsAll(points)
+    }
+
+    saySwitchServers() {
+        const streak = Math.max(
+            this.now.game.streak[0],
+            this.now.game.streak[1]
+        )
+        if (this.now.settings.gameLength === 21) {
+            if (streak >= 20) {
+                this.say('Double Kenfer')
+            } else if (streak >= 15) {
+                this.say('Turkey')
+            } else if (streak >= 10) {
+                this.say('Kenfer')
+            } else if (streak >= 5) {
+                this.say('Ofer')
+            }
+        } else {
+            if (streak >= 8) {
+                this.say('Double Ofer')
+            } else if (streak >= 4) {
+                this.say('Ofer')
+            }
+        }
+        super.saySwitchServers()
     }
 
     sayWinsGame(playerId) {
