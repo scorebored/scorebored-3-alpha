@@ -7,6 +7,7 @@ import {
     isMatchOver
 } from '../ducks/match'
 import {otherPlayer} from '../util/player'
+import allPhrases from '../phrases'
 
 export default class StandardScript {
 
@@ -80,7 +81,10 @@ export default class StandardScript {
     }
 
     say(phrase) {
-         this.phrases.push(phrase)
+        if (allPhrases[phrase] === undefined) {
+            throw new Error('do not know how to say: ' + phrase)
+        }
+        this.phrases.push(phrase)
     }
 
     announce(was, now) {
