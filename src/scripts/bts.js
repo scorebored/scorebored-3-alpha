@@ -4,12 +4,14 @@ const jacobianLine = 12
 
 export default class BtsScript extends StandardScript {
 
-    sample = () => (
-        ['Sorry Blue team'],
-        ['Jacob is not impressed']
-    )
+    sample() {
+        return [
+            'Sorry Blue team',
+            'Jacob is not impressed',
+        ]
+    }
 
-    sayPointsToPoints = (p0, p1) => {
+    sayPointsToPoints(p0, p1) {
         if (p0 === 7 && p1 === 11) {
             this.say('Slurpees')
             return
@@ -27,7 +29,7 @@ export default class BtsScript extends StandardScript {
         this.say(`${p0} to ${p1}`)
     }
 
-    sayPointsAll = (points) => {
+    sayPointsAll(points) {
         if (points === 10) {
             points = 'Ken'
         }
@@ -44,7 +46,7 @@ export default class BtsScript extends StandardScript {
         this.checkNotImpressed()
     }
 
-    sayNotImpressed = (playerId) => {
+    sayNotImpressed(playerId) {
         this.say(`Sorry ${this.playerName(playerId)} team`)
         this.say('Jacob is not impressed')
     }

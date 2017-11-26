@@ -10,7 +10,7 @@ import {otherPlayer} from '../util/player'
 
 export default class StandardScript {
 
-    sample = () => {
+    sample() {
         return [
             'Point Blue',
             '4 to 6',
@@ -18,39 +18,39 @@ export default class StandardScript {
         ]
     }
 
-    sayServesFirst = (playerId) => {
+    sayServesFirst(playerId) {
         this.say(`${this.playerName(playerId)} serves first`)
     }
 
-    sayIsServing = () => {
+    sayIsServing() {
         this.say('Switch servers')
     }
 
-    sayPoint = (playerId) => {
+    sayPoint(playerId) {
         this.say(`Point ${this.playerName(playerId)}`)
     }
 
-    sayPointsAll = (points) => {
+    sayPointsAll(points) {
         this.say(`${points} all`)
     }
 
-    sayPointsToPoints = (p0, p1) => {
+    sayPointsToPoints(p0, p1) {
         this.say(`${p0} to ${p1}`)
     }
 
-    sayGamePoint = () => {
+    sayGamePoint() {
         this.say('Game point')
     }
 
-    sayMatchPoint = () => {
+    sayMatchPoint() {
         this.say('Match point')
     }
 
-    sayAdvantage = (playerId) => {
+    sayAdvantage(playerId) {
         this.say(`Advantage ${this.playerName(playerId)}`)
     }
 
-    sayDeuce = () => {
+    sayDeuce() {
         this.say('Deuce')
     }
 
@@ -62,28 +62,28 @@ export default class StandardScript {
         this.say(`${this.playerName(playerId)} wins the match`)
     }
 
-    sayLeadsMatch = (playerId) => {
+    sayLeadsMatch(playerId) {
         const more = this.now.game.wins[playerId]
         const less = this.now.game.wins[otherPlayer(playerId)]
         const game = more === 1 ? 'game' : 'games'
         this.say(`${this.playerName(playerId)} leads the match ${more} ${game} to ${less}`)
     }
 
-    sayMatchTied = () => {
+    sayMatchTied() {
         const total = this.now.game.wins[0]
         const game = total === 1 ? 'game' : 'games'
         this.say(`Match is tied at ${total} ${game} each`)
     }
 
-    saySwitchSides = () => {
+    saySwitchSides() {
         this.say('Switch sides')
     }
 
-    say = (phrase) => {
+    say(phrase) {
          this.phrases.push(phrase)
     }
 
-    announce = (was, now) => {
+    announce(was, now) {
         this.was = was
         this.now = now
         this.phrases = []
@@ -98,7 +98,7 @@ export default class StandardScript {
         return this.phrases
     }
 
-    awardPoint = () => {
+    awardPoint() {
         if (isOvertime(this.now)) {
             this.awardPointOvertime()
             return
@@ -133,7 +133,7 @@ export default class StandardScript {
         }
     }
 
-    awardPointOvertime = () => {
+    awardPointOvertime() {
         const pwas = this.was.game.points
         const pnow = this.now.game.points
 
@@ -147,7 +147,7 @@ export default class StandardScript {
         }
     }
 
-    matchOver = () => {
+    matchOver() {
         const pwas = this.was.game.points
         const pnow = this.now.game.points
 
@@ -160,7 +160,7 @@ export default class StandardScript {
         }
     }
 
-    gameOver = () => {
+    gameOver() {
         const pwas = this.was.game.points
         const pnow = this.now.game.points
 
@@ -179,7 +179,7 @@ export default class StandardScript {
         this.saySwitchSides()
     }
 
-    playerName = (playerId) => {
+    playerName(playerId) {
         return playerId === 0 ? 'Red': 'Blue'
     }
 
