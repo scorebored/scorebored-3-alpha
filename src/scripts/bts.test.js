@@ -84,7 +84,8 @@ test('red below Jacobian line on game win', () => {
     const result = script.announce(was, now)
     expect(result).toEqual([
         'Blue wins the game',
-        'Sorry Red team, Jacob is not impressed',
+        'Sorry Red team',
+        'Jacob is not impressed',
     ])
 })
 
@@ -100,7 +101,8 @@ test('blue below Jacobian line on game win', () => {
     const result = script.announce(was, now)
     expect(result).toEqual([
         'Red wins the game',
-        'Sorry Blue team, Jacob is not impressed',
+        'Sorry Blue team',
+        'Jacob is not impressed',
     ])
 })
 
@@ -116,7 +118,8 @@ test('red below Jacobian line on match win', () => {
     const result = script.announce(was, now)
     expect(result).toEqual([
         'Blue wins the match',
-        'Sorry Red team, Jacob is not impressed',
+        'Sorry Red team',
+        'Jacob is not impressed',
     ])
 })
 
@@ -132,6 +135,7 @@ test('blue below Jacobian line on match win', () => {
     const result = script.announce(was, now)
     expect(result).toEqual([
         'Red wins the match',
-        'Sorry Blue team, Jacob is not impressed',
+        'Sorry Blue team',
+        'Jacob is not impressed',
     ])
 })

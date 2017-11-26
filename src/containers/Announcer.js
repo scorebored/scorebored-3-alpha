@@ -25,6 +25,12 @@ class Announcer extends React.Component {
     }
 
     componentDidUpdate = (was) => {
+        if (was.talkerName !== this.props.talkerName) {
+            this.assignTalker()
+        }
+        if (was.scriptName !== this.props.scriptName) {
+            this.assignScript()
+        }
         if (this.props.match.announce) {
             this.talker.cancel()
             this.talker.say(this.script.announce(was.match, this.props.match))

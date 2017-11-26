@@ -45,7 +45,8 @@ export default class BtsScript extends StandardScript {
     }
 
     sayNotImpressed = (playerId) => {
-        this.say(`Sorry ${this.playerName(playerId)} team, Jacob is not impressed`)
+        this.say(`Sorry ${this.playerName(playerId)} team`)
+        this.say('Jacob is not impressed')
     }
 
     checkNotImpressed() {
