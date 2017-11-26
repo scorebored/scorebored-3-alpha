@@ -47,10 +47,18 @@ export default class AppSettings extends React.Component {
                     <label>
                         <input
                             type='radio'
-                            value='standard'
-                            checked={this.props.talker === 'standard'}
+                            value='local'
+                            checked={this.props.talker === 'local'}
                             onChange={this.changeTalker}/>
-                        Standard
+                        Local
+                    </label>
+                    <label>
+                        <input
+                            type='radio'
+                            value='web'
+                            checked={this.props.talker === 'web'}
+                            onChange={this.changeTalker}/>
+                        Web
                     </label>
                     <label>
                         <input

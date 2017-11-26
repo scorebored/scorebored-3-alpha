@@ -1,13 +1,10 @@
 import {createAction, handleActions} from 'redux-actions'
 
-const defaultTalker = (process.platform !== 'darwin') ? 'mute' : 'standard'
-const defaultSubtitles = (process.platform !== 'darwin')
-
 const defaultState = {
     speaking: null,
-    talker: defaultTalker,
+    talker: 'local',
     script: 'standard',
-    subtitles: defaultSubtitles,
+    subtitles: false,
 }
 
 export const say = createAction('scorebored/announcer/SAY')
