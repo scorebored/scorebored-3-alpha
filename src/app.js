@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom'
 import debug from './debug'
 
 import keyboardInit from './controller/keyboard'
+import gamepadInit from './controller/gamepad'
 
 if (module.hot) {
     const render = () => {
@@ -20,4 +21,4 @@ if (module.hot) {
 
 debug()
 keyboardInit()
-
+gamepadInit()
