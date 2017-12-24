@@ -21,6 +21,8 @@ const defaultState = {
 
 export const adjust = createAction('scorebored/match/ADJUST')
 export const settings = createAction('scorebored/match/SETTINGS')
+export const setGameLength = createAction('scorebored/match/SET_GAME_LENGTH')
+export const setMatchLength = createAction('scorebored/match/SET_MATCH_LENGTH')
 export const firstServer = createAction('scorebored/match/FIRST_SERVER')
 export const awardPoint = createAction('scorebored/match/AWARD_POINT')
 export const undo = createAction('scorebored/match/UNDO')
@@ -47,6 +49,22 @@ export default handleActions({
         settings: {
             ...state.settings,
             ...action.payload,
+        },
+        announce: null,
+    }),
+    [setGameLength]: (state, action) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            gameLength: action.payload,
+        },
+        announce: null,
+    }),
+    [setMatchLength]: (state, action) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            length: action.payload,
         },
         announce: null,
     }),
